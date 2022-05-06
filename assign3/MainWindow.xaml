@@ -7,8 +7,39 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Margin="0,0,0,-6">
-        <Button Content="Button" HorizontalAlignment="Left" Margin="38,28,0,0" VerticalAlignment="Top"/>
-        <ListBox ItemsSource="{Binding}" Margin="38,87,61,55"/>
+        <Button Content="Button" 
+                HorizontalAlignment="Left" 
+                Margin="38,63,0,0" 
+                VerticalAlignment="Top" 
+                Command="{Binding SelectStudentCommand}"/>
+        <ListView Grid.Row="1" Margin="38,98,58,73" ItemsSource="{Binding Students}">
+
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Given Name">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding  GivenName}">
+
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Family Name">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding FamilyName}">
+
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
 
     </Grid>
+
 </Window>

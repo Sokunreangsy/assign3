@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-namespace assign3_con
+using assign3.Models;
+
+namespace assign3.Database
 {
     class DatabaseContext
     {
