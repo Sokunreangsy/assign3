@@ -12,8 +12,8 @@
                 Margin="38,63,0,0" 
                 VerticalAlignment="Top" 
                 Command="{Binding SelectStudentCommand}"/>
-        <ListView Grid.Row="1" Margin="38,98,58,73" ItemsSource="{Binding Students}">
 
+        <ListView Grid.Row="1" Margin="38,98,58,73" ItemsSource="{Binding Students}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Given Name">
@@ -37,7 +37,48 @@
                 </GridView>
             </ListView.View>
         </ListView>
-
+        <TextBox  Width="250"  
+                  VerticalAlignment="Top" 
+                  HorizontalAlignment="Left" 
+                  x:Name="Search" 
+                  Margin="459,63,0,0" 
+                  Height="21"
+                  Text="{Binding Path=SearchValue, UpdateSourceTrigger=PropertyChanged}">
+            
+            <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{ Binding SearchClassCommand}" />
+                </TextBox.InputBindings>
+        </TextBox>
+        <TextBlock IsHitTestVisible="False" 
+                   Text="Please enter students' name" 
+                   VerticalAlignment="Top" 
+                   HorizontalAlignment="Left" 
+                   Margin="464,65,0,0" 
+                   Foreground="DarkGray"
+                   Name="searchSuggest">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=Search}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <ComboBox HorizontalAlignment="Left" 
+                  Margin="382,63,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="77" Height="21" 
+                  SelectionChanged="SearchOptionsSelectChanged"
+                  Name="searchOptions"
+                  DropDownClosed="SearchOptionsDropDownClosed">
+            <ComboBoxItem IsSelected="True">Students</ComboBoxItem>
+            <ComboBoxItem>Classes</ComboBoxItem>
+            <ComboBoxItem>Meetings</ComboBoxItem>
+            <ComboBoxItem>Groups</ComboBoxItem>
+        </ComboBox>
 
 
     </Grid>

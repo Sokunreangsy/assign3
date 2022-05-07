@@ -17,7 +17,7 @@ namespace assign3
         {
             MainWindow = new MainWindow()
             {
-                DataContext = new StudentListController()
+                DataContext = new MainViewController()
             };
             MainWindow.Show();
             base.OnStartup(e);

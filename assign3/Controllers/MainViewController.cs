@@ -15,14 +15,12 @@ using System.Runtime.CompilerServices;
 
 namespace assign3.Controllers
 {
-    public class StudentListController : INotifyPropertyChanged
+    public class MainViewController : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-
-        private ObservableCollection<Student> _students;
-
         private DatabaseContext _db;
+        private ObservableCollection<Student> _students;
         public ObservableCollection<Student> Students
         {
             get
@@ -36,15 +34,33 @@ namespace assign3.Controllers
             }
 
         }
-        public StudentListController()
+        private string _searchValue;
+        public string SearchValue
+        {
+            get
+            {
+                return _searchValue;
+            }
+            set
+            {
+                _searchValue = value;
+                OnPropertyChanged(nameof(SearchValue));
+            }
+        }
+        public MainViewController()
         {
             //bind the "SelectStudentCommand" to select student lists
             SelectStudentCommand = new RelayCommand(obj => { this.FetchStudents(); });
+            SearchClassCommand = new RelayCommand(obj => { this.SearchClass(); });
             _db = new DatabaseContext();
         }
         protected void OnPropertyChanged(string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+        private void SearchClass()
+        {
+            string test = SearchValue;
         }
         private void FetchStudents()
         {
@@ -53,7 +69,7 @@ namespace assign3.Controllers
             Students = new ObservableCollection<Student>(results);
         }
         public ICommand SelectStudentCommand { get; set; }
-       
+        public ICommand SearchClassCommand { get; set; }
     }
       
 }
