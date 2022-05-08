@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using assign3.Controllers;
+using assign3.ViewModels;
 namespace assign3
 {
     /// <summary>
@@ -17,7 +17,7 @@ namespace assign3
         {
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewController()
+                DataContext = new MainViewModel()
             };
             MainWindow.Show();
             base.OnStartup(e);

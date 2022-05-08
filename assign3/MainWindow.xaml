@@ -3,84 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels="clr-namespace:assign3.ViewModels"
+        xmlns:views="clr-namespace:assign3.Views"
         xmlns:local="clr-namespace:assign3"
+        
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid Margin="0,0,0,-6">
-        <Button Content="Button" 
-                HorizontalAlignment="Left" 
-                Margin="38,63,0,0" 
-                VerticalAlignment="Top" 
-                Command="{Binding SelectStudentCommand}"/>
+        Title="MainWindow" Height="544" Width="790">
+    <ContentControl Content="{Binding CurrentViewModel}">
+        <ContentControl.Resources>
+            <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+                <views:HomeView/>
+            </DataTemplate>
+        </ContentControl.Resources>
+    </ContentControl>
 
-        <ListView Grid.Row="1" Margin="38,98,58,73" ItemsSource="{Binding Students}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Given Name">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding  GivenName}">
-
-                                </TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Family Name">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding FamilyName}">
-
-                                </TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <TextBox  Width="250"  
-                  VerticalAlignment="Top" 
-                  HorizontalAlignment="Left" 
-                  x:Name="Search" 
-                  Margin="459,63,0,0" 
-                  Height="21"
-                  Text="{Binding Path=SearchValue, UpdateSourceTrigger=PropertyChanged}">
-            
-            <TextBox.InputBindings>
-                    <KeyBinding Key="Enter" Command="{ Binding SearchClassCommand}" />
-                </TextBox.InputBindings>
-        </TextBox>
-        <TextBlock IsHitTestVisible="False" 
-                   Text="Please enter students' name" 
-                   VerticalAlignment="Top" 
-                   HorizontalAlignment="Left" 
-                   Margin="464,65,0,0" 
-                   Foreground="DarkGray"
-                   Name="searchSuggest">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=Search}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-        <ComboBox HorizontalAlignment="Left" 
-                  Margin="382,63,0,0" 
-                  VerticalAlignment="Top" 
-                  Width="77" Height="21" 
-                  SelectionChanged="SearchOptionsSelectChanged"
-                  Name="searchOptions"
-                  DropDownClosed="SearchOptionsDropDownClosed">
-            <ComboBoxItem IsSelected="True">Students</ComboBoxItem>
-            <ComboBoxItem>Classes</ComboBoxItem>
-            <ComboBoxItem>Meetings</ComboBoxItem>
-            <ComboBoxItem>Groups</ComboBoxItem>
-        </ComboBox>
-
-
-    </Grid>
 
 </Window>
