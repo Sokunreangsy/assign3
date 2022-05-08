@@ -89,7 +89,7 @@ namespace assign3.Database
                     //employee/researcher before deciding which kind of concrete class to create.
                     studentGroups.Add(new StudentGroup
                     {
-                        
+
                         GroupId = rdr.GetInt32(0),
                         GroupName = rdr.GetString(1)
                     });
@@ -114,7 +114,7 @@ namespace assign3.Database
         }
         public Class FetchAClass(int id)
         {
-            Class resultClass= new Class();
+            Class resultClass = new Class();
             MySqlDataReader rdr = null;
 
             try
@@ -129,16 +129,16 @@ namespace assign3.Database
                 {
                     //Note that in your assignment you will need to inspect the *type* of the
                     //employee/researcher before deciding which kind of concrete class to create.
-                    resultClass = new Class { 
-                        ClassId=rdr.GetInt32(0),
-                        GroupId=rdr.GetInt32(1),
-                        Day=ParseEnum<Days>(rdr.GetString(2)),
-                        Start=rdr.GetString(3),
-                        End=rdr.GetString(4),
-                        Room=rdr.GetString(5)
+                    resultClass = new Class {
+                        ClassId = rdr.GetInt32(0),
+                        GroupId = rdr.GetInt32(1),
+                        Day = ParseEnum<Days>(rdr.GetString(2)),
+                        Start = rdr.GetString(3),
+                        End = rdr.GetString(4),
+                        Room = rdr.GetString(5)
                     };
                 }
-                
+
             }
             catch (MySqlException e)
             {
@@ -167,5 +167,97 @@ namespace assign3.Database
         {
             return (T)Enum.Parse(typeof(T), value);
         }
+
+
+        ////==== Load all meeting ===/////
+
+
+        public List<Meeting> FetchAllMeetings(int id)
+        {
+            List<Meeting> meetings = new List<Meeting>();
+            MySqlDataReader rdr = null;
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from Meeting where meeting_id=?id", conn);
+                cmd.Parameters.AddWithValue("id", id);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    meetings.Add(new Meeting
+                    {
+                        MeetingID = rdr.GetInt32(0),
+                        GroupID = rdr.GetInt32(1),
+                        day = ParseEnum<MeetingDay>(rdr.GetString(2))
+                    });
+
+                } // end of whil
+            } //end of try
+            catch (MySqlException error)
+            {
+                Console.WriteLine("Error connecting to database: " + error);
+            } // end of catch
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            } // end of finally
+            return meetings;
+        }
+
+        ////===== fetch all meeting for a student ====////
+
+        public List<StudentMeeting> LoadStudentMeetings(int id)
+        {
+            List<StudentMeeting> studentMeeting = new List<StudentMeeting>();
+            MySqlDataReader rdr = null;
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("select * from studentMeeting where meeting_id=?id", conn);
+                cmd.Parameters.AddWithValue("id", id);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    studentMeeting.Add(new StudentMeeting
+                    {
+                        MeetingId = rdr.GetInt32(0)
+                    });
+                }   // end of while
+
+            }   //end of try
+
+            catch (MySqlException error)
+            {
+                Console.WriteLine("Error connecting to database: " + error);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }   // end of finally
+
+            return studentMeeting;
+        }
+
+
+
     }
 }
