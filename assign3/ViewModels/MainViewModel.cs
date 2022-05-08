@@ -12,18 +12,24 @@ using assign3.Models;
 using assign3.Database;
 using assign3.Command;
 using System.Runtime.CompilerServices;
+using assign3.NavState;
 
 namespace assign3.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-
-        public ViewModelBase CurrentViewModel { get; }
-        public MainViewModel()
+        private readonly NavigationState _navState;
+        public ViewModelBase CurrentViewModel => _navState.CurrentViewModel;
+        public MainViewModel(NavigationState navState)
         {
-            CurrentViewModel = new HomeViewModel();
+            _navState = navState;
+            _navState.CurrentViewModelChanged += OnCurrentViewModelChanged;
         }
 
+        private void OnCurrentViewModelChanged()
+        {
+            OnPropertyChanged(nameof(CurrentViewModel));
+        }
     }
       
 }

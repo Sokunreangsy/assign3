@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace assign3.Models
 {
-    enum Days
+    public enum Days
     {
         Monday,
         Tuesday,
@@ -16,7 +16,7 @@ namespace assign3.Models
         Saturday,
         Sunday
     }
-    class Class
+    public class Class
     {
         public int ClassId { get; set; }
         public int GroupId { get; set; }

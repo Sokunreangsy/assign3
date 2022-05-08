@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace assign3.Models
 {
-    class StudentGroup
+    public class StudentGroup
     {
         public int GroupId { get; set; }
         public string GroupName { get; set; }

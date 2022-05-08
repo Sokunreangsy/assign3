@@ -29,7 +29,7 @@ namespace assign3.Views
 
         private void ChangeTextBoxValue()
         {
-            ComboBoxItem search = (ComboBoxItem)searchOptions.SelectedItem;
+            /*ComboBoxItem search = (ComboBoxItem)searchOptions.SelectedItem;
             if (search.Content != null)
             {
 
@@ -49,7 +49,7 @@ namespace assign3.Views
                         searchSuggest.Text = "Please enter group id";
                         break;
                 }
-            }
+            }*/
         }
         private void SearchOptionsSelectChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -66,5 +66,6 @@ namespace assign3.Views
                 isSearchOptionClosed = true;
             }
         }
+        
     }
 }

@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using assign3.NavState;
 using assign3.ViewModels;
 namespace assign3
 {
@@ -15,9 +16,12 @@ namespace assign3
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            NavigationState navState = new NavigationState();
+
+            navState.CurrentViewModel = new HomeViewModel(navState);
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel()
+                DataContext = new MainViewModel(navState)
             };
             MainWindow.Show();
             base.OnStartup(e);

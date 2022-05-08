@@ -38,13 +38,14 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBox  Width="250"  
+        <TextBox  Width="242"  
                   VerticalAlignment="Top" 
                   HorizontalAlignment="Left" 
                   x:Name="Search" 
                   Margin="459,63,0,0" 
                   Height="21"
-                  Text="{Binding Path=SearchValue, UpdateSourceTrigger=PropertyChanged}">
+                  Text="{Binding Path=SearchValue, 
+                    UpdateSourceTrigger=PropertyChanged}">
 
             <TextBox.InputBindings>
                 <KeyBinding Key="Enter" Command="{ Binding SearchClassCommand}" />
@@ -74,12 +75,23 @@
                   Width="77" Height="21" 
                   SelectionChanged="SearchOptionsSelectChanged"
                   Name="searchOptions"
-                  DropDownClosed="SearchOptionsDropDownClosed">
-            <ComboBoxItem IsSelected="True">Students</ComboBoxItem>
-            <ComboBoxItem>Classes</ComboBoxItem>
-            <ComboBoxItem>Meetings</ComboBoxItem>
-            <ComboBoxItem>Groups</ComboBoxItem>
+                  
+                  DropDownClosed="SearchOptionsDropDownClosed"
+                  ItemsSource="{Binding DropDownOptions}"
+                  IsSynchronizedWithCurrentItem="True" 
+                  DisplayMemberPath="Value"
+                  SelectedValuePath="Key"
+                  
+                  SelectedValue="{Binding Option, Mode=TwoWay}"  >
+            
         </ComboBox>
+        <Button Content="Search" 
+                HorizontalAlignment="Left" 
+                Margin="701,63,0,0" 
+                VerticalAlignment="Top" 
+                Width="45" 
+                Height="21"
+                Command="{Binding NavigateResultCommand}"/>
 
 
 
