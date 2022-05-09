@@ -23,6 +23,13 @@ namespace assign3.Views
         public ResultView()
         {
             InitializeComponent();
+            GroupGrid.Visibility = Visibility.Collapsed;
+        }
+     
+
+        private void classItems_clicked(object sender, MouseButtonEventArgs e)
+        {
+            GroupGrid.Visibility = Visibility.Visible;
         }
     }
 }

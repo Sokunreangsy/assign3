@@ -5,6 +5,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using assign3.Command;
 using assign3.Database;
 using assign3.Models;
 namespace assign3.ViewModels
@@ -16,9 +18,37 @@ namespace assign3.ViewModels
         public List<StudentGroup> StudentGroups { get; set; }
 
         private DatabaseContext _db;
-        
+
+        public ICommand OnClassClickCommand { get; set; }
+        private bool _isColumnVisible;
+        private Class _selectedClass;
         private int _classId;
 
+
+        public bool IsColumnVisible
+        {
+            get
+            {
+                return _isColumnVisible;
+            }
+            set
+            {
+                _isColumnVisible = value;
+                OnPropertyChanged(nameof(IsColumnVisible));
+            }
+        }
+        public Class SelectedClass
+        {
+            get
+            {
+                return _selectedClass;
+            }
+            set
+            {
+                _selectedClass = value;
+                OnPropertyChanged(nameof(SelectedClass));
+            }
+        }
         public int ClassId
         {
             get
@@ -48,11 +78,16 @@ namespace assign3.ViewModels
         {
             _db = new DatabaseContext();
             _classId = classId;
-            FetchAClass();
+            OnClassClickCommand = new RelayCommand(obj => { this.FetchAClass(); });
+            FetchClasses();
+        }
+        private void FetchClasses()
+        {
+            Classes = new ObservableCollection<Class>(_db.FetchClasses(ClassId));
         }
         private void FetchAClass()
         {
-            Classes = new ObservableCollection<Class>(_db.FetchClasses(ClassId));
+            IsColumnVisible = true;
         }
 
     }
