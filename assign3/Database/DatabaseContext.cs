@@ -112,16 +112,19 @@ namespace assign3.Database
             }
             return studentGroups;
         }
-        public Class FetchAClass(int id)
+        public List<Class> FetchClasses(int id)
         {
-            Class resultClass= new Class();
+            List<Class> resultClass = new List<Class>();
             MySqlDataReader rdr = null;
 
             try
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("select * from class where class_id=?id", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT class_id,day,class.start,class.end,room,studentGroup.group_id,studentGroup.group_name " +
+                    "FROM class INNER JOIN studentGroup " +
+                    "ON class.group_id=studentGroup.group_id " +
+                    "WHERE class_id=?id", conn);
                 cmd.Parameters.AddWithValue("id", id);
                 rdr = cmd.ExecuteReader();
 
@@ -129,14 +132,19 @@ namespace assign3.Database
                 {
                     //Note that in your assignment you will need to inspect the *type* of the
                     //employee/researcher before deciding which kind of concrete class to create.
-                    resultClass = new Class { 
+                     Class result = new Class { 
                         ClassId=rdr.GetInt32(0),
-                        GroupId=rdr.GetInt32(1),
-                        Day=ParseEnum<Days>(rdr.GetString(2)),
-                        Start=rdr.GetString(3),
-                        End=rdr.GetString(4),
-                        Room=rdr.GetString(5)
+                        Day=ParseEnum<Days>(rdr.GetString(1)),
+                        Start=rdr.GetString(2),
+                        End=rdr.GetString(3),
+                        Room=rdr.GetString(4)
                     };
+                    result.StudentGroups.Add(new StudentGroup
+                    {
+                        GroupId = rdr.GetInt32(5),
+                        GroupName = rdr.GetString(6)
+                    });
+                    resultClass.Add(result);
                 }
                 
             }
@@ -153,8 +161,7 @@ namespace assign3.Database
                 if (conn != null)
                 {
                     conn.Close();
-                }
-                resultClass.StudentGroups = FetchGroups(resultClass.GroupId);
+                }              
             }
 
             return resultClass;

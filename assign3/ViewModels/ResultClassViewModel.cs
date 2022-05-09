@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,53 +11,48 @@ namespace assign3.ViewModels
 {
     class ResultClassViewModel : ViewModelBase
     {
-        private Class _aClass = new Class();
+        private ObservableCollection<Class> _classes ;
 
         public List<StudentGroup> StudentGroups { get; set; }
 
         private DatabaseContext _db;
         
-        public string Start => _aClass.Start;
-        public string End => _aClass.End;
-        public string Room => _aClass.Room;
+        private int _classId;
 
-
-        private string _day;
-        public string Day
+        public int ClassId
         {
             get
             {
-                return _aClass.Day.ToString();
+                return _classId;
             }
-            set
+            set 
             {
-                _day = value;
-                OnPropertyChanged(nameof(Day));
+                _classId = value;
+                OnPropertyChanged(nameof(ClassId));
             }
         }
-        public Class Aclass
+        public ObservableCollection<Class> Classes
         {
             get
             {
-                return _aClass;
+                return _classes;
             }
             set
             {
-                _aClass = value;
-                OnPropertyChanged(nameof(Aclass));
+                _classes = value;
+                OnPropertyChanged(nameof(_classes));
             }
 
         }
         public ResultClassViewModel(int classId) 
         {
             _db = new DatabaseContext();
-            _aClass.ClassId = classId;
+            _classId = classId;
             FetchAClass();
         }
         private void FetchAClass()
         {
-            _aClass = _db.FetchAClass(_aClass.ClassId);
-            
+            Classes = new ObservableCollection<Class>(_db.FetchClasses(ClassId));
         }
 
     }

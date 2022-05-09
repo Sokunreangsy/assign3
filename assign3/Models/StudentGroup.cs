@@ -14,7 +14,7 @@ namespace assign3.Models
 
         public override string ToString()
         {
-            return String.Format("GroupId-{0}:{1}\n", GroupId, GroupName);
+            return String.Format("{0} {1}", GroupId, GroupName);
         }
     }
 }
