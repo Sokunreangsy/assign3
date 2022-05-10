@@ -9,10 +9,10 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
 
-        <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Text="Classes with ID-" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Height="17"/>
+        <TextBlock HorizontalAlignment="Left" Margin="32,71,0,0" Text="Classes with ID-" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Height="17"/>
         <TextBlock 
             HorizontalAlignment="Left" 
-            Margin="123,32,0,0" 
+            Margin="132,72,0,0" 
             Text="{Binding ClassId}" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top"/>
@@ -188,7 +188,7 @@
                       Grid.Column="2">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Group Name">
+                        <GridViewColumn Header="Group Name" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding GroupName}">
@@ -197,9 +197,9 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        
-                        
-                        
+
+
+
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -233,5 +233,10 @@
                        TextWrapping="Wrap" 
                        VerticalAlignment="Top"/>
         </Grid>
+        <Button Content="Back" 
+                HorizontalAlignment="Left" 
+                Margin="32,24,0,0" 
+                VerticalAlignment="Top" Height="22" Width="43"
+                Command="{Binding OnBackNavCommand}"/>
     </Grid>
 </UserControl>

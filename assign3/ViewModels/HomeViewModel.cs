@@ -14,6 +14,7 @@ using System.Runtime.CompilerServices;
 using assign3.NavState;
 using System.Data;
 using System.Reflection;
+using System.Windows;
 
 namespace assign3.ViewModels
 {
@@ -130,9 +131,37 @@ namespace assign3.ViewModels
         {
             switch (Option)
             {
+                case "0":
+                    {
+                        _navState.CurrentViewModel = new ResultMeetingViewModel(Int32.Parse(SearchValue));
+                        break;
+                    }
+                    
                 case "1":
-                    _navState.CurrentViewModel = new ResultClassViewModel(Int32.Parse(SearchValue));
+                    if (checkClassInput(SearchValue))
+                    {
+                        _navState.CurrentViewModel = new ResultClassViewModel(Int32.Parse(SearchValue), _navState);
+                    }
+                    else
+                    {
+                        MessageBox.Show("The text entered is: ");
+                    }
+                    
                     break;
+            }
+        }
+        private bool checkClassInput(string input)
+        {
+            //for class input
+            try 
+            { 
+
+                Int32.Parse(input);
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
         private void FetchMeeting()

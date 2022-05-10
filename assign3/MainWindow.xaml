@@ -19,6 +19,9 @@
             <DataTemplate DataType="{x:Type viewmodels:ResultClassViewModel}">
                 <views:ResultView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ResultMeetingViewModel}">
+                <views:ResultMeetingView/>
+            </DataTemplate>
         </ContentControl.Resources>
     </ContentControl>
 

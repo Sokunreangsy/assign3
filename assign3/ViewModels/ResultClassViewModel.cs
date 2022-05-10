@@ -9,6 +9,8 @@ using System.Windows.Input;
 using assign3.Command;
 using assign3.Database;
 using assign3.Models;
+using assign3.NavState;
+
 namespace assign3.ViewModels
 {
     class ResultClassViewModel : ViewModelBase
@@ -19,6 +21,7 @@ namespace assign3.ViewModels
 
         private DatabaseContext _db;
 
+        private readonly NavigationState _navState;
         public ICommand OnClassClickCommand { get; set; }
         private bool _isColumnVisible;
         private Class _selectedClass;
@@ -28,7 +31,8 @@ namespace assign3.ViewModels
         private string _start;
         private string _end;
         private string _room;
-
+        public ICommand OnBackNavCommand { get; set; }
+        
 
 
         public string Day
@@ -140,18 +144,20 @@ namespace assign3.ViewModels
             }
 
         }
-        public ResultClassViewModel(int classId) 
+        public ResultClassViewModel(int classId, NavigationState navState)
         {
+            _navState = navState;
             _db = new DatabaseContext();
             _classId = classId;
-            OnClassClickCommand = new RelayCommand(obj => { this.FetchAClass(obj); });
+            OnClassClickCommand = new RelayCommand(obj => { this.FetchAClass(); });
+            OnBackNavCommand = new RelayCommand(obj => { this.navHomeView(); });
             FetchClasses();
         }
         private void FetchClasses()
         {
             Classes = new ObservableCollection<Class>(_db.FetchClasses(ClassId));
         }
-        private void FetchAClass(object test)
+        private void FetchAClass()
         {
 
             IsColumnVisible = true;
@@ -165,6 +171,10 @@ namespace assign3.ViewModels
             }
            
         }
+        public void navHomeView()
+        {
+            _navState.CurrentViewModel = new HomeViewModel(_navState);
 
+        }
     }
 }
