@@ -21,14 +21,14 @@ namespace assign3.Models
 		public int MeetingID { get; set; }
         public int GroupID { get; set; }
         public MeetingDay day { get; set; }
-		/*public DateTime Start { get; set; }
-		public DateTime End { get; set; } 
-		public double Room { get; set; } */
+		public string Start { get; set; }
+		public string End { get; set; } 
+		public string Room { get; set; } 
 		public override string ToString()
 		{
 			
-			//return String.Format("Meeting-{0} for Group-{1} on {2} starts from {3} to {4} in {5}", MeetingID, GroupID, day, Start, End, Room);
-			return String.Format("{0} {1} {2}", MeetingID, GroupID,day.ToString());
+			return String.Format("{0} {1} {2} {3} {4} {5}", MeetingID, GroupID, day, Start, End, Room);
+			//return String.Format("{0} {1} {2} ", MeetingID, GroupID,day.ToString());
 			// check later 
 
 		}

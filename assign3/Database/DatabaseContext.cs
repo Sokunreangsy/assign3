@@ -188,15 +188,15 @@ namespace assign3.Database
                         MeetingID = rdr.GetInt32(0),
                         GroupID = rdr.GetInt32(1),
                         day = ParseEnum<MeetingDay>(rdr.GetString(2)),
-                        /*Start = rdr.GetString(3),
-                        End = rdr.GetDateTime(4),
-                        Room = rdr.GetDouble(5)*/
+                        Start = rdr.GetString(3),
+                        End = rdr.GetString(4),
+                        Room = rdr.GetString(5)
 
                         /// fetch only time
                         ///https://www.tutorialsrack.com/articles/309/how-to-get-only-time-part-from-datetime-in-csharp
                     });
 
-                } // end of whil
+                } // end of while
             } //end of try
             catch (MySqlException error)
             {
