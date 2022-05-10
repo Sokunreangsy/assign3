@@ -13,18 +13,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace assign3
+namespace assign3.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ResultView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ResultView : UserControl
     {
-
-        public MainWindow()
+        public ResultView()
         {
             InitializeComponent();
+            GroupGrid.Visibility = Visibility.Collapsed;
         }
-        
+     
+
+        private void classItems_clicked(object sender, MouseButtonEventArgs e)
+        {
+            GroupGrid.Visibility = Visibility.Visible;
+        }
     }
 }

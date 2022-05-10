@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace assign3.Models
 {
-    enum Days
+    public enum Days
     {
         Monday,
         Tuesday,
@@ -16,7 +16,7 @@ namespace assign3.Models
         Saturday,
         Sunday
     }
-    class Class
+    public class Class
     {
         public int ClassId { get; set; }
         public int GroupId { get; set; }
@@ -28,18 +28,12 @@ namespace assign3.Models
 
         public Class()
         {
-            
+            StudentGroups = new List<StudentGroup>();   
         }
 
         public override string ToString()
         {
-            string studentGroups = "\n";
-
-            foreach (var group in StudentGroups)
-            {
-                studentGroups += group.ToString();
-            }
-            return String.Format("class-{0} on {1} {2}-{3} in room {4}{5}",ClassId,Day,Start,End,Room,studentGroups);
+            return String.Format("{0} {1} {2} {3}",Day.ToString(),Start,End,Room);
         }
     }
 }
