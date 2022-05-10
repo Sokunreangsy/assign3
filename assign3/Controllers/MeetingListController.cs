@@ -28,29 +28,27 @@ namespace assign3.Controllers
 
 		}
 
-		protected void OnPropertyChanged(string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-
-		/*public MeetingListController()
+		public MeetingListController()
 		{
 			
 			SelectMeetingCommand = new RelayCommand(obj => { this.FetchMeeting(); });
 			_db = new DatabaseContext();
 		}
 
+
+		protected void OnPropertyChanged(string name = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
+
 		private void FetchMeeting()
 		{
 			List<Meeting> results = new List<Meeting>();
 			results = _db.FetchAllMeetings();
-			Meetings = new ObservableCollection<Student>(results);
+			Meetings = new ObservableCollection<Meeting>(results);
 		}
-*/
+		public ICommand SelectMeetingCommand { get; set; } 
 
 
-
-
-
-	}// end of MeetingListController
+	}// end of public class MeetingListController
 }

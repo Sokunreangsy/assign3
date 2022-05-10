@@ -12,14 +12,21 @@
                 Margin="38,63,0,0" 
                 VerticalAlignment="Top" 
                 Command="{Binding SelectStudentCommand}"/>
-        <ListView Grid.Row="1" Margin="38,98,58,73" ItemsSource="{Binding Students}">
+
+        <Button Content="Button" 
+                HorizontalAlignment="Left" 
+                Margin="317,63,0,0" 
+                VerticalAlignment="Top" 
+                Command="{Binding SelectMeetingCommand}"/>
+
+        <ListView Margin="38,98,548,109" ItemsSource="{Binding Students}">
 
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Given Name">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding  GivenName}">
+                                <TextBlock Text="{Binding GivenName}">
 
                                 </TextBlock>
                             </DataTemplate>
@@ -37,6 +44,69 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
+        <ListView Margin="317,98,83,109" ItemsSource="{Binding Meetings}">
+
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Meeting ID">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding MeetingID}">
+
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Group ID">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding GroupID}">
+
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Day">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding day}">
+
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Start">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Start}">
+
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="End">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding End}">
+
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Room">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Room}">
+
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
 
 
 

@@ -172,7 +172,7 @@ namespace assign3.Database
         ////==== Load all meeting ===/////
 
 
-        public List<Meeting> FetchAllMeetings(int id)
+        public List<Meeting> FetchAllMeetings()          //change to load all 
         {
             List<Meeting> meetings = new List<Meeting>();
             MySqlDataReader rdr = null;
@@ -181,7 +181,7 @@ namespace assign3.Database
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("select * from Meeting where meeting_id=?id", conn);
-                cmd.Parameters.AddWithValue("id", id);
+                //cmd.Parameters.AddWithValue("id", id);
                 rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
@@ -191,6 +191,12 @@ namespace assign3.Database
                         MeetingID = rdr.GetInt32(0),
                         GroupID = rdr.GetInt32(1),
                         day = ParseEnum<MeetingDay>(rdr.GetString(2))
+                        /*Start = rdr.GetDateTime(3),
+                        End = rdr.GetDateTime(4),
+                        Room = rdr.GetDouble(5)*/
+
+                        /// fetch only time
+                        ///https://www.tutorialsrack.com/articles/309/how-to-get-only-time-part-from-datetime-in-csharp
                     });
 
                 } // end of whil
