@@ -169,7 +169,52 @@ namespace assign3.Database
         /*SELECT class_id,day,class.start,class.end,room FROM class 
         INNER JOIN studentGroup ON class.group_id=studentGroup.group_id
         WHERE class_id=2 */
+        public List<Meeting> FetchAllMeetings()          //change to load all 
+        {
+            List<Meeting> meetings = new List<Meeting>();
+            MySqlDataReader rdr = null;
 
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from meeting", conn);
+                //cmd.Parameters.AddWithValue("id", id);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    meetings.Add(new Meeting
+                    {
+                        MeetingID = rdr.GetInt32(0),
+                        GroupID = rdr.GetInt32(1),
+                        day = ParseEnum<MeetingDay>(rdr.GetString(2)),
+                        /*Start = rdr.GetString(3),
+                        End = rdr.GetDateTime(4),
+                        Room = rdr.GetDouble(5)*/
+
+                        /// fetch only time
+                        ///https://www.tutorialsrack.com/articles/309/how-to-get-only-time-part-from-datetime-in-csharp
+                    });
+
+                } // end of whil
+            } //end of try
+            catch (MySqlException error)
+            {
+                Console.WriteLine("Error connecting to database: " + error);
+            } // end of catch
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            } // end of finally
+            return meetings;
+        }
         private static T ParseEnum<T>(string value)
         {
             return (T)Enum.Parse(typeof(T), value);

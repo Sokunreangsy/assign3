@@ -8,36 +8,24 @@
              d:DesignHeight="450" d:DesignWidth="800"
              >
     <Grid>
-        <Button Content="Button" 
+        <Button Content="Student" 
                 HorizontalAlignment="Left" 
                 Margin="38,63,0,0" 
                 VerticalAlignment="Top" 
                 Command="{Binding SelectStudentCommand}"/>
+        <Button Content="Meeting" 
+                HorizontalAlignment="Left" 
+                Margin="88,63,0,0" 
+                VerticalAlignment="Top" 
+                Command="{Binding SelectMeetingCommand}"/>
+        <DataGrid Margin="58,158,166,68"
+                  AutoGenerateColumns="True" 
+                  GridLinesVisibility="All" 
+                  Foreground="Black" 
+                  ItemsSource="{Binding ItemSource, Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True}"  
+                  TargetUpdated="GridResultUpdated"
+                  IsReadOnly="True"  />
 
-        <ListView Grid.Row="1" Margin="38,98,58,73" ItemsSource="{Binding Students}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Given Name">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding  GivenName}">
-
-                                </TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Family Name">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding FamilyName}">
-
-                                </TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
         <TextBox  Width="242"  
                   VerticalAlignment="Top" 
                   HorizontalAlignment="Left" 
@@ -83,7 +71,7 @@
                   SelectedValuePath="Key"
                   
                   SelectedValue="{Binding Option, Mode=TwoWay}"  >
-            
+
         </ComboBox>
         <Button Content="Search" 
                 HorizontalAlignment="Left" 

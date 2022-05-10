@@ -66,6 +66,20 @@ namespace assign3.Views
                 isSearchOptionClosed = true;
             }
         }
-        
+
+        private void GridResultUpdated(object sender, DataTransferEventArgs e)
+        {
+            DataGrid itemList = sender as DataGrid;
+            if (itemList.Columns.Count != 0)
+            {
+                if ((string)itemList.Columns[0].Header == "StudentId")
+                {
+                    itemList.Columns.RemoveAt(0);
+                }
+
+            }
+            
+                
+        }
     }
 }

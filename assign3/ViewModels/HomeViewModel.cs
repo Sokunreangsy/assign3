@@ -12,6 +12,8 @@ using assign3.Database;
 using assign3.Command;
 using System.Runtime.CompilerServices;
 using assign3.NavState;
+using System.Data;
+using System.Reflection;
 
 namespace assign3.ViewModels
 {
@@ -28,7 +30,23 @@ namespace assign3.ViewModels
         public ICommand SearchClassCommand { get; set; }
         public ICommand NavigateResultCommand { get; set; }
 
+        public ICommand SelectMeetingCommand { get; set; }
+        private DataTable _itemSource;
         private ObservableCollection<Student> _students;
+
+
+        public DataTable ItemSource
+        {
+            get
+            {
+                return _itemSource;
+            }
+            set
+            {
+                _itemSource = value;
+                OnPropertyChanged(nameof(ItemSource));
+            }
+        }
         public ObservableCollection<Student> Students
         {
             get
@@ -95,6 +113,7 @@ namespace assign3.ViewModels
             SelectStudentCommand = new RelayCommand(obj => { this.FetchStudents(); });
             SearchClassCommand = new RelayCommand(obj => { this.SearchClass(); });
             NavigateResultCommand = new RelayCommand(obj => { this.navResultView(); });
+            SelectMeetingCommand = new RelayCommand(obj => { this.FetchMeeting(); });
             _db = new DatabaseContext();
         }
         private void SearchClass()
@@ -105,7 +124,7 @@ namespace assign3.ViewModels
         {
             List<Student> results = new List<Student>();
             results = _db.FetchAllStudents();
-            Students = new ObservableCollection<Student>(results);
+            ItemSource = ToDataTable<Student>(results);
         }
         public void navResultView()
         {
@@ -116,6 +135,58 @@ namespace assign3.ViewModels
                     break;
             }
         }
+        private void FetchMeeting()
+        {
+            List<Meeting> results = new List<Meeting>();
+            results = _db.FetchAllMeetings();
+            ItemSource = ToDataTable<Meeting>(results);
+        }
+        private DataTable ToDataTable<T>(List<T> items)
+        {
+            DataTable dataTable = new DataTable(typeof(T).Name);
+
+            //Get all the properties
+            PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (PropertyInfo prop in Props)
+            {
+                //Defining type of data column gives proper data table 
+                var type = (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>) ? Nullable.GetUnderlyingType(prop.PropertyType) : prop.PropertyType);
+
+                if (type.IsEnum)
+                {
+                    dataTable.Columns.Add(prop.Name, typeof(string));
+                }
+                else
+                {
+                    dataTable.Columns.Add(prop.Name, type);
+                }
+                //Setting column names as Property names
+                
+                
+            }
+            foreach (T item in items)
+            {
+                var values = new object[Props.Length];
+                for (int i = 0; i < Props.Length; i++)
+                {
+                    //inserting property values to datatable rows
+                    if (Props[i].PropertyType.IsEnum)
+                    {
+                        values[i] = Props[i].GetValue(item, null)?.ToString();
+                    }
+                    else
+                    {
+                        values[i] = Props[i].GetValue(item, null);
+                    }
+                    
+                }
+                dataTable.Rows.Add(values);
+            }
+            //put a breakpoint here and check datatable
+            return dataTable;
+        }
+        //https://stackoverflow.com/questions/18100783/how-to-convert-a-list-into-data-table
+
         //https://www.youtube.com/watch?v=DM6Q7g7j7jc&list=PLA8ZIAm2I03ggP55JbLOrXl6puKw4rEb2&index=3
     }
 
