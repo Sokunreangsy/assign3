@@ -15,7 +15,7 @@ namespace assign3.ViewModels
     {
         private ObservableCollection<Class> _classes ;
 
-        public List<StudentGroup> StudentGroups { get; set; }
+        private ObservableCollection<StudentGroup> _selectedStudentGroups;
 
         private DatabaseContext _db;
 
@@ -24,7 +24,73 @@ namespace assign3.ViewModels
         private Class _selectedClass;
         private int _classId;
 
+        private string _day;
+        private string _start;
+        private string _end;
+        private string _room;
 
+
+
+        public string Day
+        {
+            get
+            {
+                return _day;
+            }
+            set
+            {
+                _day = value;
+                OnPropertyChanged(nameof(Day));
+            }
+        }
+        public string Start
+        {
+            get
+            {
+                return _start;
+            }
+            set
+            {
+                _start = value;
+                OnPropertyChanged(nameof(Start));
+            }
+        }
+        public string End
+        {
+            get
+            {
+                return _end;
+            }
+            set
+            {
+                _end = value;
+                OnPropertyChanged(nameof(End));
+            }
+        }
+        public string Room
+        {
+            get
+            {
+                return _room;
+            }
+            set
+            {
+                _room = value;
+                OnPropertyChanged(nameof(Room));
+            }
+        }
+        public ObservableCollection<StudentGroup> SelectedStudentGroups
+        {
+            get
+            {
+                return _selectedStudentGroups;
+            }
+            set
+            {
+                _selectedStudentGroups = value;
+                OnPropertyChanged(nameof(SelectedStudentGroups));
+            }
+        }
         public bool IsColumnVisible
         {
             get
@@ -78,16 +144,26 @@ namespace assign3.ViewModels
         {
             _db = new DatabaseContext();
             _classId = classId;
-            OnClassClickCommand = new RelayCommand(obj => { this.FetchAClass(); });
+            OnClassClickCommand = new RelayCommand(obj => { this.FetchAClass(obj); });
             FetchClasses();
         }
         private void FetchClasses()
         {
             Classes = new ObservableCollection<Class>(_db.FetchClasses(ClassId));
         }
-        private void FetchAClass()
+        private void FetchAClass(object test)
         {
+
             IsColumnVisible = true;
+            if(SelectedClass != null)
+            {
+                SelectedStudentGroups = new ObservableCollection<StudentGroup>(SelectedClass.StudentGroups);
+                Day = SelectedClass.Day.ToString();
+                Start = SelectedClass.Start;
+                End = SelectedClass.End;
+                Room = SelectedClass.Room;
+            }
+           
         }
 
     }

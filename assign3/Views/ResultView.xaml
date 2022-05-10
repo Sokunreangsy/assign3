@@ -17,10 +17,14 @@
             TextWrapping="Wrap" 
             VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="369,19,0,0" Text="Please Select your class" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="128"/>
-        <ListView x:Name="classItems" Margin="369,40,102,232" ItemsSource="{Binding Classes}" PreviewMouseLeftButtonDown="classItems_clicked">
+        <ListView x:Name="classItems" Margin="369,40,102,232" ItemsSource="{Binding Classes}" 
+                  SelectionMode="Single" 
+                  PreviewMouseLeftButtonDown="classItems_clicked"
+                  SelectedItem="{Binding SelectedClass}">
             <Triggers:Interaction.Triggers>
                 <Triggers:EventTrigger EventName="SelectionChanged">
-                    <Triggers:InvokeCommandAction Command="{Binding OnClassClickCommand}" CommandParameter="{Binding SelectedClass, ElementName=classItems}"/>
+                    <Triggers:InvokeCommandAction Command="{Binding OnClassClickCommand}" 
+                                                  />
                 </Triggers:EventTrigger>
             </Triggers:Interaction.Triggers>
             <ListView.View>
@@ -28,7 +32,7 @@
                     <GridViewColumn Header="Day">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding  Day}">
+                                <TextBlock Text="{Binding Day}">
 
                                 </TextBlock>
                             </DataTemplate>
@@ -97,7 +101,13 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock HorizontalAlignment="Left" Margin="100,14,0,0" Text="Class ID" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <TextBlock HorizontalAlignment="Left" 
+                       Margin="100,14,0,0" 
+                       Text="{Binding ClassId}"  
+                       TextWrapping="Wrap" 
+                       VerticalAlignment="Top" 
+                       RenderTransformOrigin="0.5,0.5"
+                       >
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -107,7 +117,7 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock HorizontalAlignment="Left" Margin="17,50,0,0" Text="Day" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <TextBlock HorizontalAlignment="Left" Margin="16,49,0,0" Text="Day" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -127,7 +137,7 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock HorizontalAlignment="Left" Margin="16,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="20">
+            <TextBlock HorizontalAlignment="Left" Margin="15,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="20">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -174,20 +184,26 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </TextBlock.RenderTransform></TextBlock>
-            <ListView Margin="42,53,47,28" ItemsSource="{Binding Classes}" Grid.Column="2">
+            <ListView Margin="42,53,47,28" ItemsSource="{Binding SelectedStudentGroups}" 
+                      Grid.Column="2">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Group" >
+                        <GridViewColumn Header="Group Name">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Room}"/>
+                                    <TextBlock Text="{Binding GroupName}">
+
+                                    </TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
+                        
+                        
+                        
                     </GridView>
                 </ListView.View>
             </ListView>
-            <TextBlock HorizontalAlignment="Left" Margin="341,14,0,0" Text="Groups" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <TextBlock HorizontalAlignment="Left" Margin="42,14,0,0" Text="Groups" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Grid.Column="2" Width="67">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -197,6 +213,25 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="96,53,0,0" 
+                       Text="{Binding Day}" 
+                       TextWrapping="Wrap" 
+                       VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" 
+                       Margin="96,86,0,0" 
+                       Text="{Binding Start}"  
+                       TextWrapping="Wrap" 
+                       VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" 
+                       Margin="96,122,0,0" 
+                       Text="{Binding End}"  
+                       TextWrapping="Wrap" 
+                       VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left"
+                       Margin="96,152,0, 0" 
+                       Text="{Binding Room}"  
+                       TextWrapping="Wrap" 
+                       VerticalAlignment="Top"/>
         </Grid>
     </Grid>
 </UserControl>

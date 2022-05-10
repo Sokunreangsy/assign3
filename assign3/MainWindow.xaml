@@ -8,7 +8,9 @@
         xmlns:local="clr-namespace:assign3"
         
         mc:Ignorable="d"
-        Title="MainWindow" Height="544" Width="790">
+        MinWidth="868"
+        MinHeight="582"
+        Title="MainWindow" Height="582" Width="868">
     <ContentControl Content="{Binding CurrentViewModel}">
         <ContentControl.Resources>
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
