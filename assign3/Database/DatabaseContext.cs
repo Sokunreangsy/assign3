@@ -181,7 +181,7 @@ namespace assign3.Database
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("select * from Meeting where meeting_id=?id", conn);
-                //cmd.Parameters.AddWithValue("id", id);
+                //cmd.Parameters.AddWithValue("id", meetingID);
                 rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
@@ -221,7 +221,7 @@ namespace assign3.Database
 
         ////===== fetch all meeting for a student ====////
 
-        public List<StudentMeeting> LoadStudentMeetings(int id)
+        public List<StudentMeeting> LoadStudentMeetings(int meetingid)
         {
             List<StudentMeeting> studentMeeting = new List<StudentMeeting>();
             MySqlDataReader rdr = null;
@@ -231,18 +231,23 @@ namespace assign3.Database
                 conn.Open();
 
                 MySqlCommand cmd = new MySqlCommand("select * from studentMeeting where meeting_id=?id", conn);
-                cmd.Parameters.AddWithValue("id", id);
+                cmd.Parameters.AddWithValue("id", meetingid);
                 rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
                 {
                     studentMeeting.Add(new StudentMeeting
                     {
-                        MeetingId = rdr.GetInt32(0)
+                        MeetingID = rdr.GetInt32(0),
+                        GroupID = rdr.GetInt32(1),
+                        day = ParseEnum<MeetingDay>(rdr.GetString(2)),
+                        Start = rdr.GetString(3),
+                        End = rdr.GetString(4),
+                        Room = rdr.GetString(5)
                     });
-                }   // end of while
+                }
 
-            }   //end of try
+            }
 
             catch (MySqlException error)
             {
@@ -258,7 +263,7 @@ namespace assign3.Database
                 {
                     conn.Close();
                 }
-            }   // end of finally
+            }
 
             return studentMeeting;
         }

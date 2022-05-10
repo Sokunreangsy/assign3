@@ -19,11 +19,11 @@ namespace assign3.Models
 	public class Meeting
 	{
 		public int MeetingID { get; set; }
-        public int GroupID { get; set; }
-        public MeetingDay day { get; set; }
-		/*public DateTime Start { get; set; }
-		public DateTime End { get; set; } 
-		public double Room { get; set; } */
+		public int GroupID { get; set; }
+		public MeetingDay day { get; set; }
+		public string Start { get; set; }
+		public string End { get; set; }
+		public string Room { get; set; }
 		public override string ToString()
 		{
 			

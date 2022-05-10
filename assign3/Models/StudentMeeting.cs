@@ -9,11 +9,16 @@ namespace assign3.Models
 	class StudentMeeting
 	{
 
-		public int MeetingId { get; set; }
+        public int MeetingID { get; set; }
+        public int GroupID { get; set; }
+		public MeetingDay day { get; set; }
+		public string Start { get; set; }
+		public string End { get; set; }
+		public string Room { get; set; }
 
 		public override string ToString()
 		{
-			return String.Format("MeetingID-{0}", MeetingId);
+			return String.Format("{0} {1} {2} {3} {4} {5}", MeetingID, GroupID, day, Start, End, Room);
 		}
 
 

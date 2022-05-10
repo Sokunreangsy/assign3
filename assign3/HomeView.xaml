@@ -7,6 +7,76 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Button Content="Student" 
+                HorizontalAlignment="Left" 
+                Margin="38,63,0,0" 
+                VerticalAlignment="Top" 
+                Command="{Binding SelectStudentCommand}"/>
+        <Button Content="Meeting" 
+                HorizontalAlignment="Left" 
+                Margin="88,63,0,0" 
+                VerticalAlignment="Top" 
+                Command="{Binding SelectMeetingCommand}"/>
+        <DataGrid Margin="58,158,166,68"
+                  AutoGenerateColumns="True" 
+                  GridLinesVisibility="All" 
+                  Foreground="Black" 
+                  ItemsSource="{Binding ItemSource, Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True}"
+                  IsReadOnly="True"  />
+
+        <TextBox  Width="242"  
+                  VerticalAlignment="Top" 
+                  HorizontalAlignment="Left" 
+                  x:Name="Search" 
+                  Margin="459,63,0,0" 
+                  Height="21"
+                  Text="{Binding Path=SearchValue, 
+                    UpdateSourceTrigger=PropertyChanged}">
+
+            <TextBox.InputBindings>
+                <KeyBinding Key="Enter" Command="{ Binding SearchClassCommand}" />
+            </TextBox.InputBindings>
+        </TextBox>
+        <TextBlock IsHitTestVisible="False" 
+                   Text="Please enter students' name" 
+                   VerticalAlignment="Top" 
+                   HorizontalAlignment="Left" 
+                   Margin="464,65,0,0" 
+                   Foreground="DarkGray"
+                   Name="searchSuggest">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=Search}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <ComboBox HorizontalAlignment="Left" 
+                  Margin="382,63,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="77" Height="21" 
+                  
+                  Name="searchOptions"
+                  
+                
+                  ItemsSource="{Binding DropDownOptions}"
+                  IsSynchronizedWithCurrentItem="True" 
+                  DisplayMemberPath="Value"
+                  SelectedValuePath="Key"
+                  
+                  SelectedValue="{Binding Option, Mode=TwoWay}"  >
+
+        </ComboBox>
+        <Button Content="Search" 
+                HorizontalAlignment="Left" 
+                Margin="701,63,0,0" 
+                VerticalAlignment="Top" 
+                Width="45" 
+                Height="21"
+                Command="{Binding NavigateResultCommand}"/>
     </Grid>
 </UserControl>
