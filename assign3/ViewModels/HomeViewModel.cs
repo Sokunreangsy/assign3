@@ -114,16 +114,12 @@ namespace assign3.ViewModels
             _navState = navState;
             Option = "0";
             SelectStudentCommand = new RelayCommand(obj => { this.FetchStudents(); });
-            SearchClassCommand = new RelayCommand(obj => { this.SearchClass(); });
             NavigateResultCommand = new RelayCommand(obj => { this.navResultView(); });
             SelectMeetingCommand = new RelayCommand(obj => { this.FetchMeeting(); });
             NavigateIntCommand = new RelayCommand(obj => { this.navIntView(); });
             _db = new DatabaseContext();
         }
-        private void SearchClass()
-        {
-            string test = SearchValue;
-        }
+
         private void FetchStudents()
         {
             List<Student> results = new List<Student>();
@@ -141,11 +137,7 @@ namespace assign3.ViewModels
             state = _navState;
             switch (Option)
             {
-                case "0":
-                    {
-                        _navState.CurrentViewModel = new ResultMeetingViewModel(Int32.Parse(SearchValue));
-                        break;
-                    }
+                
                     
                 case "1":
                     if (checkClassInput(SearchValue))
@@ -158,6 +150,12 @@ namespace assign3.ViewModels
                     }
                     
                     break;
+
+                case "2":
+                    {
+                        _navState.CurrentViewModel = new ResultMeetingViewModel(Int32.Parse(SearchValue));
+                        break;
+                    }
             }
         }
         private bool checkClassInput(string input)

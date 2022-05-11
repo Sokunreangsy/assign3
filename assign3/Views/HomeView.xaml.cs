@@ -29,9 +29,10 @@ namespace assign3.Views
 
         private void ChangeTextBoxValue()
         {
-            if(searchOptions != null)
+            if(searchOptions.SelectedItem != null)
             {
-                KeyValuePair<int, string> search = (KeyValuePair<int, string>)searchOptions.SelectedItem;
+                KeyValuePair<int, string> search = new KeyValuePair<int, string>();
+                search = (KeyValuePair<int, string>)searchOptions.SelectedItem;
                 if (search.Value != null)
                 {
 

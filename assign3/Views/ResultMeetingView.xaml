@@ -7,6 +7,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="222*" />
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="21*" />
+
+        </Grid.ColumnDefinitions>
         <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Text="Student ID" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Height="17"/>
         <TextBlock HorizontalAlignment="Left" Margin="32,60,0,0" Text="Given Name" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Height="17"/>
         <TextBlock HorizontalAlignment="Left" Margin="32,92,0,0" Text="Family Name" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Height="17"/>

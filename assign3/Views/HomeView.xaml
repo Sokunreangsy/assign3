@@ -20,20 +20,20 @@
 
         </Grid.ColumnDefinitions>
         <Button Content="Student" 
-                Margin="62,37,678,16" 
+                Margin="61,37,689,16" 
                 Grid.Column="0" Grid.Row="0" 
-                Command="{Binding SelectStudentCommand}" Width="50" Height="20"
+                Command="{Binding SelectStudentCommand}" Width="50" Height="20" RenderTransformOrigin="-0.409,0.803"
                 />
         <Button Content="Back" 
-                Margin="19,10,731,43" 
-                Grid.Column="0" Grid.Row="0" 
-                Command="{Binding NavigateIntCommand}" Width="50" Height="20"
+                Margin="61,12,0,41" 
+                HorizontalAlignment="Left"
+                Command="{Binding NavigateIntCommand}" Width="50" Height="20" RenderTransformOrigin="1.127,0.292"
                 />
         <Button Content="Meeting" 
-                Margin="146,37,606,16" 
+                Margin="132,37,620,16" 
                 Grid.Column="0" Grid.Row="0"
                 Command="{Binding SelectMeetingCommand}" Width="48" Height="20"/>
-        <DataGrid Margin="112,47,112,47"
+        <DataGrid Margin="61,41,54,46"
                   AutoGenerateColumns="True" 
                   GridLinesVisibility="All" 
                   Foreground="Black" 
@@ -49,9 +49,6 @@
                   Text="{Binding Path=SearchValue, 
                     UpdateSourceTrigger=PropertyChanged}" Height="20">
 
-            <TextBox.InputBindings>
-                <KeyBinding Key="Enter" Command="{ Binding SearchClassCommand}" />
-            </TextBox.InputBindings>
         </TextBox>
         <TextBlock IsHitTestVisible="False" 
                    Text="Please enter students' name" 

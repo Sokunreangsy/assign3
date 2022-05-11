@@ -81,11 +81,7 @@ namespace assign3.ViewModels
 
             switch (Option)
             {
-                case "0":
-                    {
-                        _navState.CurrentViewModel = new ResultMeetingViewModel(Int32.Parse(SearchValue));
-                        break;
-                    }
+                
 
                 case "1":
                     if (checkClassInput(SearchValue))
@@ -98,6 +94,11 @@ namespace assign3.ViewModels
                     }
 
                     break;
+                case "2":
+                    {
+                        _navState.CurrentViewModel = new ResultMeetingViewModel(Int32.Parse(SearchValue));
+                        break;
+                    }
             }
         }
         private bool checkClassInput(string input)
