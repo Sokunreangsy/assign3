@@ -24,6 +24,11 @@
                 Grid.Column="0" Grid.Row="0" 
                 Command="{Binding SelectStudentCommand}" Width="50" Height="20"
                 />
+        <Button Content="Back" 
+                Margin="19,10,731,43" 
+                Grid.Column="0" Grid.Row="0" 
+                Command="{Binding NavigateIntCommand}" Width="50" Height="20"
+                />
         <Button Content="Meeting" 
                 Margin="146,37,606,16" 
                 Grid.Column="0" Grid.Row="0"

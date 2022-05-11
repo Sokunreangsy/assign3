@@ -16,11 +16,17 @@
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
                 <views:HomeView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:InitialViewModel}">
+                <views:InitialView/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:ResultClassViewModel}">
                 <views:ResultView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:ResultMeetingViewModel}">
                 <views:ResultMeetingView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:BachelorViewModel}">
+                <views:BachelorView/>
             </DataTemplate>
         </ContentControl.Resources>
     </ContentControl>

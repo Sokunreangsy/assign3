@@ -30,8 +30,9 @@ namespace assign3.ViewModels
         public ICommand SelectStudentCommand { get; set; }
         public ICommand SearchClassCommand { get; set; }
         public ICommand NavigateResultCommand { get; set; }
-
+        
         public ICommand SelectMeetingCommand { get; set; }
+        public ICommand NavigateIntCommand { get; set; }
         private DataTable _itemSource;
         private ObservableCollection<Student> _students;
 
@@ -111,10 +112,12 @@ namespace assign3.ViewModels
         {
             //bind the "SelectStudentCommand" to select student lists
             _navState = navState;
+            Option = "0";
             SelectStudentCommand = new RelayCommand(obj => { this.FetchStudents(); });
             SearchClassCommand = new RelayCommand(obj => { this.SearchClass(); });
             NavigateResultCommand = new RelayCommand(obj => { this.navResultView(); });
             SelectMeetingCommand = new RelayCommand(obj => { this.FetchMeeting(); });
+            NavigateIntCommand = new RelayCommand(obj => { this.navIntView(); });
             _db = new DatabaseContext();
         }
         private void SearchClass()
@@ -127,8 +130,15 @@ namespace assign3.ViewModels
             results = _db.FetchAllStudents();
             ItemSource = ToDataTable<Student>(results);
         }
+
+        public void navIntView()
+        {
+            _navState.CurrentViewModel = new InitialViewModel(_navState);
+        }
         public void navResultView()
         {
+            NavigationState state = new NavigationState();
+            state = _navState;
             switch (Option)
             {
                 case "0":
@@ -140,7 +150,7 @@ namespace assign3.ViewModels
                 case "1":
                     if (checkClassInput(SearchValue))
                     {
-                        _navState.CurrentViewModel = new ResultClassViewModel(Int32.Parse(SearchValue), _navState);
+                        _navState.CurrentViewModel = new ResultClassViewModel(Int32.Parse(SearchValue), _navState, this.GetType().Name);
                     }
                     else
                     {

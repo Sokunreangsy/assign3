@@ -22,6 +22,7 @@ namespace assign3.ViewModels
         private DatabaseContext _db;
 
         private readonly NavigationState _navState;
+        private readonly string _preNavState;
         public ICommand OnClassClickCommand { get; set; }
         private bool _isColumnVisible;
         private Class _selectedClass;
@@ -144,9 +145,10 @@ namespace assign3.ViewModels
             }
 
         }
-        public ResultClassViewModel(int classId, NavigationState navState)
+        public ResultClassViewModel(int classId, NavigationState navState, String preNavState)
         {
             _navState = navState;
+            _preNavState = preNavState;
             _db = new DatabaseContext();
             _classId = classId;
             OnClassClickCommand = new RelayCommand(obj => { this.FetchAClass(); });
@@ -173,7 +175,14 @@ namespace assign3.ViewModels
         }
         public void navHomeView()
         {
-            _navState.CurrentViewModel = new HomeViewModel(_navState);
+            if(_preNavState == "BachelorViewModel")
+            {
+                _navState.CurrentViewModel = new BachelorViewModel(_navState);
+            }
+            else
+            {
+                _navState.CurrentViewModel = new HomeViewModel(_navState);
+            }
 
         }
     }

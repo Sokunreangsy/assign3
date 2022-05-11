@@ -29,27 +29,31 @@ namespace assign3.Views
 
         private void ChangeTextBoxValue()
         {
-            /*ComboBoxItem search = (ComboBoxItem)searchOptions.SelectedItem;
-            if (search.Content != null)
+            if(searchOptions != null)
             {
-
-                switch (search.Content.ToString())
+                KeyValuePair<int, string> search = (KeyValuePair<int, string>)searchOptions.SelectedItem;
+                if (search.Value != null)
                 {
-                    case "Students":
-                        searchSuggest.Text = "Please enter students' name";
-                        break;
 
-                    case "Classes":
-                        searchSuggest.Text = "Please enter class id";
-                        break;
-                    case "Meetings":
-                        searchSuggest.Text = "Please enter meeting id";
-                        break;
-                    case "Groups":
-                        searchSuggest.Text = "Please enter group id";
-                        break;
+                    switch (search.Value)
+                    {
+                        case "Students":
+                            searchSuggest.Text = "Please enter students' name";
+                            break;
+
+                        case "Classes":
+                            searchSuggest.Text = "Please enter class id";
+                            break;
+                        case "Meetings":
+                            searchSuggest.Text = "Please enter meeting id";
+                            break;
+                        case "Groups":
+                            searchSuggest.Text = "Please enter group id";
+                            break;
+                    }
                 }
-            }*/
+            }
+            
         }
         private void SearchOptionsSelectChanged(object sender, SelectionChangedEventArgs e)
         {
