@@ -1,6 +1,7 @@
 ﻿using assign3.Command;
 using assign3.Database;
 using assign3.Models;
+using assign3.NavState;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +14,7 @@ namespace assign3.ViewModels
 {
     class ResultMeetingViewModel: ViewModelBase
     {
+        private NavigationState _navState;
         private ObservableCollection<Meeting> _meetings;
         private DatabaseContext _db;
         public ICommand OnMeetingClickCommand { get; set; }
@@ -38,8 +40,9 @@ namespace assign3.ViewModels
 
         }
 
-        public ResultMeetingViewModel(int meetingId)
+        public ResultMeetingViewModel(int meetingId, NavigationState navState, String preNavState)
         {
+            _navState = navState;
             _db = new DatabaseContext();
             _meetingId = meetingId;
             FetchAllMeetings();

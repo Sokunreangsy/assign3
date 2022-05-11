@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using assign3.Command;
 using assign3.Database;
@@ -158,6 +159,9 @@ namespace assign3.ViewModels
         private void FetchClasses()
         {
             Classes = new ObservableCollection<Class>(_db.FetchClasses(ClassId));
+            if (Classes.Count == 0) {
+                MessageBox.Show("No result found");
+            }
         }
         private void FetchAClass()
         {

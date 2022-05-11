@@ -90,13 +90,21 @@ namespace assign3.ViewModels
                     }
                     else
                     {
-                        MessageBox.Show("The text entered is: ");
+                        MessageBox.Show("Invalid Input (numbers only)");
                     }
 
                     break;
                 case "2":
                     {
-                        _navState.CurrentViewModel = new ResultMeetingViewModel(Int32.Parse(SearchValue));
+                        if (checkClassInput(SearchValue))
+                        {
+                            _navState.CurrentViewModel = new ResultMeetingViewModel(Int32.Parse(SearchValue), _navState, this.GetType().Name);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid Input (numbers only)"); 
+                        }
+                        
                         break;
                     }
             }

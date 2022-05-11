@@ -16,9 +16,9 @@
             <ColumnDefinition Width="21*" />
 
         </Grid.ColumnDefinitions>
-        <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Text="Student ID" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Height="17"/>
-        <TextBlock HorizontalAlignment="Left" Margin="32,60,0,0" Text="Given Name" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Height="17"/>
-        <TextBlock HorizontalAlignment="Left" Margin="32,92,0,0" Text="Family Name" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Height="17"/>
+        <TextBlock HorizontalAlignment="Left" Margin="32,81,0,0" Text="Student ID" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Height="17"/>
+        <TextBlock HorizontalAlignment="Left" Margin="32,116,0,0" Text="Given Name" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Height="17"/>
+        <TextBlock HorizontalAlignment="Left" Margin="32,147,0,0" Text="Family Name" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Height="17"/>
         <TextBlock 
             HorizontalAlignment="Left" 
             Margin="123,32,0,0" 
@@ -90,6 +90,7 @@
             </ListView.View>
 
         </ListView>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="32,34,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </UserControl>
