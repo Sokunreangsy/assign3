@@ -14,13 +14,14 @@ namespace assign3.Models
 		Thursday,
 		Friday,
 		Saturday,
-		Sunday
+		Sunday,
+		empty
 	}
 	public class Meeting
 	{
-		public int MeetingID { get; set; }
-        public int GroupID { get; set; }
-        public MeetingDay day { get; set; }
+		public int? MeetingID { get; set; }
+        public int? GroupID { get; set; }
+        public MeetingDay? day { get; set; }
 		public string Start { get; set; }
 		public string End { get; set; } 
 		public string Room { get; set; } 

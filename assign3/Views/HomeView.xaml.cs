@@ -81,6 +81,14 @@ namespace assign3.Views
                 {
                     itemList.Columns.RemoveAt(0);
                 }
+                if (itemList.Columns.Count == 7)
+                {
+                    if ((string)itemList.Columns[6].Header == "StudentGroups")
+                    {
+                        itemList.Columns.RemoveAt(6);
+                    }
+                }
+               
 
             }
             
