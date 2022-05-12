@@ -15,12 +15,26 @@ namespace assign3.ViewModels
     class ResultMeetingViewModel: ViewModelBase
     {
         private NavigationState _navState;
+        private string _preNavState;
+        private Student _aStudent;
         private ObservableCollection<Meeting> _meetings;
         private DatabaseContext _db;
-        public ICommand OnMeetingClickCommand { get; set; }
+        public ICommand OnBackCommand { get; set; }
         private Meeting _selectedMeeting;
-        private int _meetingId;
+        
 
+        public Student AStudent
+        {
+            get
+            {
+                return _aStudent;
+            }
+            set
+            {
+                _aStudent = value;
+                OnPropertyChanged(nameof(AStudent));
+            }
+        }
         public Meeting SelectedMeeting
         {
             get { return _selectedMeeting; }
@@ -40,17 +54,30 @@ namespace assign3.ViewModels
 
         }
 
-        public ResultMeetingViewModel(int meetingId, NavigationState navState, String preNavState)
+        public ResultMeetingViewModel(int studentid, NavigationState navState, string preNavState)
         {
             _navState = navState;
+            _preNavState = preNavState;
             _db = new DatabaseContext();
-            _meetingId = meetingId;
-            FetchAllMeetings();
+            FetchAStudent(studentid);
+            OnBackCommand = new RelayCommand(obj => { this.navHomeView(); });
         }
-
-        private void FetchAllMeetings()
+        public void navHomeView()
         {
-            Meetings = new ObservableCollection<Meeting>(_db.FetchAllMeetings());
+            if (_preNavState == "BachelorViewModel")
+            {
+                _navState.CurrentViewModel = new BachelorViewModel(_navState);
+            }
+            else
+            {
+                _navState.CurrentViewModel = new HomeViewModel(_navState);
+            }
+
+        }
+        private void FetchAStudent(int id)
+        {
+            AStudent = _db.FetchStudentMeeting(id);
+            Meetings = new ObservableCollection<Meeting>(AStudent.MeetingsList);
         }
 
 

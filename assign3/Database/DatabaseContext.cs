@@ -277,6 +277,64 @@ namespace assign3.Database
             } // end of finally
             return meetings;
         }
+        public Student FetchStudentMeeting(int id)          //change to load all 
+        {
+            Student student = new Student();
+            MySqlDataReader rdr = null;
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT student.student_id,student.given_name,student.family_name,meeting.meeting_id,meeting.group_id,meeting.day,meeting.start,meeting.end,meeting.room " +
+                    "FROM student " +
+                    "INNER JOIN meeting " +
+                    "ON student.group_id=meeting.group_id " +
+                    "WHERE student.student_id=?id", conn);
+                cmd.Parameters.AddWithValue("id", id);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Meeting meeting = new Meeting();
+                    
+                    if (rdr.IsDBNull(1))
+                    {
+                        meeting.GroupID = null;
+                    }
+                    else
+                    {
+                        meeting.GroupID = rdr?.GetInt32(4);
+                    }
+                    student.StudentId = rdr?.GetInt32(0);
+                    student.GivenName = rdr.GetString(1);
+                    student.FamilyName = rdr?.GetString(2);
+
+                    meeting.MeetingID = rdr?.GetInt32(3);
+                    meeting.day = ParseEnum<MeetingDay>(rdr?.GetString(5));
+                    meeting.Start = rdr?.GetString(6);
+                    meeting.End = rdr?.GetString(7);
+                    meeting.Room = rdr?.GetString(8);
+                    student.MeetingsList.Add(meeting);
+                } // end of while
+            } //end of try
+            catch (MySqlException error)
+            {
+                Console.WriteLine("Error connecting to database: " + error);
+            } // end of catch
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            } // end of finally
+
+            return student;
+        }
         private static T ParseEnum<T>(string value)
         {
             if (value =="")
