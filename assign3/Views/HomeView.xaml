@@ -20,6 +20,7 @@
 
         </Grid.ColumnDefinitions>
         <Button Content="Student" 
+
                 Margin="61,37,689,16" 
                 Grid.Column="0" Grid.Row="0" 
                 Command="{Binding SelectStudentCommand}" Width="50" Height="20" RenderTransformOrigin="-0.409,0.803"
@@ -29,6 +30,7 @@
                 HorizontalAlignment="Left"
                 Command="{Binding NavigateIntCommand}" Width="50" Height="20" RenderTransformOrigin="1.127,0.292"
                 />
+
         <Button Content="Meeting" 
                 Margin="132,37,620,16" 
                 Grid.Column="0" Grid.Row="0"
@@ -82,11 +84,26 @@
                   
                   SelectedValue="{Binding Option, Mode=TwoWay}" Height="20" Width="77"  />
         <Button Content="Search" 
+
                 
                 Margin="707,37,54,16" 
                 Grid.Column="0" Grid.Row="0"
                 
                 Command="{Binding NavigateResultCommand}" Height="20" Width="39" RenderTransformOrigin="1.556,1.108"/>
+
+                HorizontalAlignment="Left" 
+                Margin="701,63,0,0" 
+                VerticalAlignment="Top" 
+                Width="45" 
+                Height="21"
+                Command="{Binding NavigateResultCommand}"/>
+        <Button Content="Class" 
+                HorizontalAlignment="Left" 
+                Margin="141,63,0,0" 
+                VerticalAlignment="Top" 
+                Click="Button_Click" 
+                Width="40"
+                Command="{Binding SelectClassCommand}"/>
 
 
 

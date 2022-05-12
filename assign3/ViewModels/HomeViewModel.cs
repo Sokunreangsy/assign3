@@ -29,6 +29,7 @@ namespace assign3.ViewModels
         private DatabaseContext _db;
         public ICommand SelectStudentCommand { get; set; }
         public ICommand SearchClassCommand { get; set; }
+        public ICommand SelectClassCommand { get; set; }
         public ICommand NavigateResultCommand { get; set; }
         
         public ICommand SelectMeetingCommand { get; set; }
@@ -116,7 +117,11 @@ namespace assign3.ViewModels
             SelectStudentCommand = new RelayCommand(obj => { this.FetchStudents(); });
             NavigateResultCommand = new RelayCommand(obj => { this.navResultView(); });
             SelectMeetingCommand = new RelayCommand(obj => { this.FetchMeeting(); });
+
             NavigateIntCommand = new RelayCommand(obj => { this.navIntView(); });
+
+            SelectClassCommand = new RelayCommand(obj => { this.FetchClass(); });
+
             _db = new DatabaseContext();
         }
 
@@ -171,6 +176,13 @@ namespace assign3.ViewModels
             {
                 return false;
             }
+        }
+
+        private void FetchClass()
+        {
+            List<Class> results = new List<Class>();
+            results = _db.FetchAllClasses();
+            ItemSource = ToDataTable<Class>(results);
         }
         private void FetchMeeting()
         {
