@@ -11,7 +11,7 @@ namespace assign3.ViewModels
 {
     class InitialViewModel: ViewModelBase
     {
-
+        //commands to bechelor or master view
         public ICommand NavigateMainCommand { get; set; }
         private readonly NavigationState _navState;
         public ICommand NavigateBachelorCommand { get; set; }
@@ -23,7 +23,7 @@ namespace assign3.ViewModels
             NavigateMainCommand = new RelayCommand(obj => { this.navHomeView(); });
             NavigateBachelorCommand = new RelayCommand(obj => { this.navBachelorView(); });
         }
-
+        
         private void navHomeView()
         {
             _navState.CurrentViewModel = new HomeViewModel(_navState);

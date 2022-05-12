@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace assign3.Models
 {
+    /// <summary>
+    /// model for studentGroup table
+    /// </summary>
     public class StudentGroup
     {
         public int? GroupId { get; set; }

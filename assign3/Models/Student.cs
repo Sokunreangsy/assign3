@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace assign3.Models
 {
+    /// <summary>
+    /// model for student table
+    /// </summary>
     public enum Campus 
     { 
         Hobart,

@@ -16,6 +16,7 @@ using assign3.NavState;
 
 namespace assign3.ViewModels
 {
+    //changing viewmodels
     public class MainViewModel : ViewModelBase
     {
         private readonly NavigationState _navState;

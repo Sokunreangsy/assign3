@@ -8,6 +8,7 @@ using assign3.Models;
 
 namespace assign3.Database
 {
+    //class for database communications
     class DatabaseContext
     {
         private const string db = "gmis";
