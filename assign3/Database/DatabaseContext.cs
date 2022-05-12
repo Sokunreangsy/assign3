@@ -335,6 +335,54 @@ namespace assign3.Database
 
             return student;
         }
+        public StudentGroup FetchGroupStudents(int id)          //change to load all 
+        {
+            StudentGroup group = new StudentGroup();
+            MySqlDataReader rdr = null;
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT studentGroup.group_id,studentGroup.group_name," +
+                    "student.student_id,student.given_name,student.family_name " +
+                    "FROM studentGroup " +
+                    "INNER JOIN student " +
+                    "ON student.group_id=studentGroup.group_id " +
+                    "WHERE studentGroup.group_id=?id", conn);
+                cmd.Parameters.AddWithValue("id", id);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Student student = new Student();
+
+                    group.GroupId = rdr?.GetInt32(0);
+                    group.GroupName = rdr?.GetString(1);
+                    student.StudentId = rdr?.GetInt32(2);
+                    student.GivenName = rdr.GetString(3);
+                    student.FamilyName = rdr?.GetString(4);
+
+                    group.StudentList.Add(student);
+                } // end of while
+            } //end of try
+            catch (MySqlException error)
+            {
+                Console.WriteLine("Error connecting to database: " + error);
+            } // end of catch
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            } // end of finally
+
+            return group;
+        }
         private static T ParseEnum<T>(string value)
         {
             if (value =="")

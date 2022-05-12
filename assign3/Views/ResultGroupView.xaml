@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="assign3.Views.ResultGroupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:assign3.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Button Content="Back" HorizontalAlignment="Left" Margin="59,47,0,0" VerticalAlignment="Top"
+                Command="{Binding OnBackCommand}"/>
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Margin="59,93,0,0" 
+            Text="Result found with Group" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top"/>
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Margin="201,93,0,0" 
+            Text="{Binding GroupId}" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top"/>
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Margin="372,36,0,0" 
+            Text="Students" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top"/>
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Margin="59,125,0,0" 
+            Text="Group Name" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top"/>
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Margin="201,125,0,0" 
+            Text="{Binding GroupName}" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top"/>
+        <ListView x:Name="classItems" 
+                  Margin="372,57,55,215"
+                  ItemsSource="{Binding Students}"  >
+
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Student ID">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding  StudentId}">
+
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+
+                    <GridViewColumn Header="Given Name">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding GivenName}">
+
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Family Name" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding FamilyName}">
+
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</UserControl>
