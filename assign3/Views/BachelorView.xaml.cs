@@ -35,15 +35,15 @@ namespace assign3.Views
 
                     switch (search.Value)
                     {
-                        case "Students":
-                            searchSuggest.Text = "Please enter students' name";
+                        case "Student Groups":
+                            searchSuggest.Text = "Please enter students' id";
                             break;
 
                         case "Classes":
                             searchSuggest.Text = "Please enter class id";
                             break;
-                        case "Meetings":
-                            searchSuggest.Text = "Please enter meeting id";
+                        case "Student Classes":
+                            searchSuggest.Text = "Please enter students' id";
                             break;
                         case "Groups":
                             searchSuggest.Text = "Please enter group id";

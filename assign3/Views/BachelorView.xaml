@@ -50,7 +50,7 @@
                 Command="{Binding NavigateResultCommand}" 
                 RenderTransformOrigin="1.556,1.108" Width="45" Height="19"/>
         <ComboBox 
-                  Margin="184,138,539,293" 
+                  Margin="141,138,539,293" 
                   
                   Grid.Column="0" Grid.Row="0"
                   SelectionChanged="SearchOptionsSelectChanged"
@@ -62,7 +62,7 @@
                   DisplayMemberPath="Value"
                   SelectedValuePath="Key"
                   
-                  SelectedValue="{Binding Option, Mode=TwoWay}" Width="77" Height="19"  />
+                  SelectedValue="{Binding Option, Mode=TwoWay}" Height="20" Width="120"  />
         <Button 
             Content="Back" 
             HorizontalAlignment="Left" 
