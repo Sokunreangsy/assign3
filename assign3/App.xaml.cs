@@ -18,7 +18,7 @@ namespace assign3
         {
             NavigationState navState = new NavigationState();
 
-            navState.CurrentViewModel = new HomeViewModel(navState);
+            navState.CurrentViewModel = new InitialViewModel(navState);
             MainWindow = new MainWindow()
             {
                 DataContext = new MainViewModel(navState)

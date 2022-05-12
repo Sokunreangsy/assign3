@@ -8,19 +8,32 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="225*" />
+            <RowDefinition Height="225*" />
 
-        <TextBlock HorizontalAlignment="Left" Margin="32,32,0,0" Text="Classes with ID-" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Height="17"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="21*" />
+
+        </Grid.ColumnDefinitions>
+        <TextBlock HorizontalAlignment="Left" Margin="32,71,0,0" Text="Classes with ID-" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Height="17"/>
         <TextBlock 
             HorizontalAlignment="Left" 
-            Margin="123,32,0,0" 
+            Margin="132,72,0,0" 
             Text="{Binding ClassId}" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="369,19,0,0" Text="Please Select your class" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="128"/>
-        <ListView x:Name="classItems" Margin="369,40,102,232" ItemsSource="{Binding Classes}" PreviewMouseLeftButtonDown="classItems_clicked">
+        <ListView x:Name="classItems" Margin="369,40,128,33" ItemsSource="{Binding Classes}" 
+                  SelectionMode="Single" 
+                  PreviewMouseLeftButtonDown="classItems_clicked"
+                  SelectedItem="{Binding SelectedClass}">
             <Triggers:Interaction.Triggers>
                 <Triggers:EventTrigger EventName="SelectionChanged">
-                    <Triggers:InvokeCommandAction Command="{Binding OnClassClickCommand}" CommandParameter="{Binding SelectedClass, ElementName=classItems}"/>
+                    <Triggers:InvokeCommandAction Command="{Binding OnClassClickCommand}" 
+                                                  />
                 </Triggers:EventTrigger>
             </Triggers:Interaction.Triggers>
             <ListView.View>
@@ -28,7 +41,7 @@
                     <GridViewColumn Header="Day">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding  Day}">
+                                <TextBlock Text="{Binding Day}">
 
                                 </TextBlock>
                             </DataTemplate>
@@ -67,11 +80,13 @@
 
         </ListView>
 
-        <Grid x:Name="GroupGrid" Margin="32,237,171,10">
+        <Grid x:Name="GroupGrid" Margin="32,15,10,10"  
+              RenderTransformOrigin="0.444,0.483" 
+              Grid.Column="1" Grid.Row="1" >
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto">
+
+                <ColumnDefinition Width="Auto" MinWidth="758">
                     <ColumnDefinition.Style>
                         <Style TargetType="ColumnDefinition">
                             <Setter Property="Width" Value="*" />
@@ -83,11 +98,11 @@
                         </Style>
                     </ColumnDefinition.Style>
                 </ColumnDefinition>
-                <ColumnDefinition />
+                <ColumnDefinition Width="0*" />
 
             </Grid.ColumnDefinitions>
 
-            <TextBlock HorizontalAlignment="Left" Margin="14,14,0,0" Text="Class Details" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <TextBlock HorizontalAlignment="Left" Margin="14,14,0,0" Text="Class Details" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="16" Width="66">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -97,7 +112,13 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock HorizontalAlignment="Left" Margin="100,14,0,0" Text="Class ID" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <TextBlock HorizontalAlignment="Left" 
+                       Margin="105,15,0,0" 
+                       Text="{Binding ClassId}"  
+                       TextWrapping="Wrap" 
+                       VerticalAlignment="Top" 
+                       RenderTransformOrigin="0.5,0.5" Height="16" Width="108"
+                       >
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -107,7 +128,7 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock HorizontalAlignment="Left" Margin="17,50,0,0" Text="Day" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <TextBlock HorizontalAlignment="Left" Margin="16,49,0,0" Text="Day" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="17" Width="33">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -117,7 +138,7 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock HorizontalAlignment="Left" Margin="14,87,0,0" Text="Start" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <TextBlock HorizontalAlignment="Left" Margin="14,87,0,0" Text="Start" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="17" Width="37">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -127,7 +148,7 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock HorizontalAlignment="Left" Margin="16,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="20">
+            <TextBlock HorizontalAlignment="Left" Margin="15,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="20" Width="31">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -136,7 +157,7 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </TextBlock.RenderTransform><Run Text="End"/><LineBreak/><Run/></TextBlock>
-            <TextBlock HorizontalAlignment="Left" Margin="27,386,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="20" Text="Room">
+            <TextBlock HorizontalAlignment="Left" Margin="15,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="20" Text="Room" Width="42">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -145,49 +166,26 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </TextBlock.RenderTransform></TextBlock>
-            <TextBlock HorizontalAlignment="Left" Margin="83,292,0,0" Text="Day" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
-                <TextBlock.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="0.365"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </TextBlock.RenderTransform>
-            </TextBlock>
-            <TextBlock HorizontalAlignment="Left" Margin="81,324,0,0" Text="Start" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
-                <TextBlock.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="0.365"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </TextBlock.RenderTransform>
-            </TextBlock>
-            <TextBlock HorizontalAlignment="Left" Margin="15,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="20" Text="Room">
-                <TextBlock.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="0.365"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </TextBlock.RenderTransform></TextBlock>
-            <ListView Margin="42,53,47,28" ItemsSource="{Binding Classes}" Grid.Column="2">
+            <ListView Margin="344,37,115,32" ItemsSource="{Binding SelectedStudentGroups}" 
+                      >
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Group" >
+                        <GridViewColumn Header="Group Name" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Room}"/>
+                                    <TextBlock Text="{Binding GroupName}">
+
+                                    </TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
+
+
+
                     </GridView>
                 </ListView.View>
             </ListView>
-            <TextBlock HorizontalAlignment="Left" Margin="341,14,0,0" Text="Groups" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <TextBlock HorizontalAlignment="Left" Margin="344,18,0,0" Text="Groups" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="67" Height="16">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -197,6 +195,30 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="96,53,0,0" 
+                       Text="{Binding Day}" 
+                       TextWrapping="Wrap" 
+                       VerticalAlignment="Top" Height="16" Width="108"/>
+            <TextBlock HorizontalAlignment="Left" 
+                       Margin="96,86,0,0" 
+                       Text="{Binding Start}"  
+                       TextWrapping="Wrap" 
+                       VerticalAlignment="Top" Height="16" Width="108"/>
+            <TextBlock HorizontalAlignment="Left" 
+                       Margin="96,122,0,0" 
+                       Text="{Binding End}"  
+                       TextWrapping="Wrap" 
+                       VerticalAlignment="Top" Height="16" Width="108"/>
+            <TextBlock HorizontalAlignment="Left"
+                       Margin="96,152,0, 0" 
+                       Text="{Binding Room}"  
+                       TextWrapping="Wrap" 
+                       VerticalAlignment="Top" Height="16" Width="108"/>
         </Grid>
+        <Button Content="Back" 
+                HorizontalAlignment="Left" 
+                Margin="32,24,0,0" 
+                VerticalAlignment="Top" Height="22" Width="43"
+                Command="{Binding OnBackNavCommand}"/>
     </Grid>
 </UserControl>

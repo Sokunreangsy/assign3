@@ -8,44 +8,56 @@
              d:DesignHeight="450" d:DesignWidth="800"
              >
     <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="43*" />
+            <RowDefinition Height="222*" />
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="21*" />
+
+        </Grid.ColumnDefinitions>
         <Button Content="Student" 
-                HorizontalAlignment="Left" 
-                Margin="38,63,0,0" 
-                VerticalAlignment="Top" 
-                Command="{Binding SelectStudentCommand}"/>
+
+                Margin="61,37,689,16" 
+                Grid.Column="0" Grid.Row="0" 
+                Command="{Binding SelectStudentCommand}" Width="50" Height="20" RenderTransformOrigin="-0.409,0.803"
+                />
+        <Button Content="Back" 
+                Margin="61,12,0,41" 
+                HorizontalAlignment="Left"
+                Command="{Binding NavigateIntCommand}" Width="50" Height="20" RenderTransformOrigin="1.127,0.292"
+                />
+
         <Button Content="Meeting" 
-                HorizontalAlignment="Left" 
-                Margin="88,63,0,0" 
-                VerticalAlignment="Top" 
-                Command="{Binding SelectMeetingCommand}"/>
-        <DataGrid Margin="58,158,166,68"
+                Margin="132,37,620,16" 
+                Grid.Column="0" Grid.Row="0"
+                Command="{Binding SelectMeetingCommand}" Width="48" Height="20"/>
+        <DataGrid Margin="61,41,54,46"
                   AutoGenerateColumns="True" 
                   GridLinesVisibility="All" 
                   Foreground="Black" 
                   ItemsSource="{Binding ItemSource, Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True}"  
                   TargetUpdated="GridResultUpdated"
-                  IsReadOnly="True"  />
+                  IsReadOnly="True" Grid.Row="1"  />
 
         <TextBox  Width="242"  
-                  VerticalAlignment="Top" 
-                  HorizontalAlignment="Left" 
+                  
                   x:Name="Search" 
-                  Margin="459,63,0,0" 
-                  Height="21"
+                  Margin="465,37,93,16"
+                  Grid.Column="0" Grid.Row="0"
                   Text="{Binding Path=SearchValue, 
-                    UpdateSourceTrigger=PropertyChanged}">
+                    UpdateSourceTrigger=PropertyChanged}" Height="20">
 
-            <TextBox.InputBindings>
-                <KeyBinding Key="Enter" Command="{ Binding SearchClassCommand}" />
-            </TextBox.InputBindings>
         </TextBox>
         <TextBlock IsHitTestVisible="False" 
                    Text="Please enter students' name" 
-                   VerticalAlignment="Top" 
-                   HorizontalAlignment="Left" 
-                   Margin="464,65,0,0" 
+                   Grid.Column="0" Grid.Row="0"
+                   Margin="470,39,182,18" 
                    Foreground="DarkGray"
-                   Name="searchSuggest">
+                   Name="searchSuggest" Height="16" Width="148">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -57,12 +69,12 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <ComboBox HorizontalAlignment="Left" 
-                  Margin="382,63,0,0" 
-                  VerticalAlignment="Top" 
-                  Width="77" Height="21" 
+        <ComboBox 
+                  Margin="388,37,335,16" 
+                  
+                  Grid.Column="0" Grid.Row="0"
                   SelectionChanged="SearchOptionsSelectChanged"
-                  Name="searchOptions"
+                  Name="searchOptions" 
                   
                   DropDownClosed="SearchOptionsDropDownClosed"
                   ItemsSource="{Binding DropDownOptions}"
@@ -70,16 +82,28 @@
                   DisplayMemberPath="Value"
                   SelectedValuePath="Key"
                   
-                  SelectedValue="{Binding Option, Mode=TwoWay}"  >
-
-        </ComboBox>
+                  SelectedValue="{Binding Option, Mode=TwoWay}" Height="20" Width="77"  />
         <Button Content="Search" 
+
+                
+                Margin="707,37,54,16" 
+                Grid.Column="0" Grid.Row="0"
+                
+                Command="{Binding NavigateResultCommand}" Height="20" Width="39" RenderTransformOrigin="1.556,1.108"/>
+
                 HorizontalAlignment="Left" 
                 Margin="701,63,0,0" 
                 VerticalAlignment="Top" 
                 Width="45" 
                 Height="21"
                 Command="{Binding NavigateResultCommand}"/>
+        <Button Content="Class" 
+                HorizontalAlignment="Left" 
+                Margin="141,63,0,0" 
+                VerticalAlignment="Top" 
+                Click="Button_Click" 
+                Width="40"
+                Command="{Binding SelectClassCommand}"/>
 
 
 
