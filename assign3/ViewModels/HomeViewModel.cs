@@ -14,6 +14,7 @@ using System.Runtime.CompilerServices;
 using assign3.NavState;
 using System.Data;
 using System.Reflection;
+using System.Windows;
 
 namespace assign3.ViewModels
 {
@@ -30,8 +31,9 @@ namespace assign3.ViewModels
         public ICommand SearchClassCommand { get; set; }
         public ICommand SelectClassCommand { get; set; }
         public ICommand NavigateResultCommand { get; set; }
-
+        
         public ICommand SelectMeetingCommand { get; set; }
+        public ICommand NavigateIntCommand { get; set; }
         private DataTable _itemSource;
         private ObservableCollection<Student> _students;
 
@@ -111,30 +113,68 @@ namespace assign3.ViewModels
         {
             //bind the "SelectStudentCommand" to select student lists
             _navState = navState;
+            Option = "0";
             SelectStudentCommand = new RelayCommand(obj => { this.FetchStudents(); });
-            SearchClassCommand = new RelayCommand(obj => { this.SearchClass(); });
             NavigateResultCommand = new RelayCommand(obj => { this.navResultView(); });
             SelectMeetingCommand = new RelayCommand(obj => { this.FetchMeeting(); });
+
+            NavigateIntCommand = new RelayCommand(obj => { this.navIntView(); });
+
             SelectClassCommand = new RelayCommand(obj => { this.FetchClass(); });
+
             _db = new DatabaseContext();
         }
-        private void SearchClass()
-        {
-            string test = SearchValue;
-        }
+
         private void FetchStudents()
         {
             List<Student> results = new List<Student>();
             results = _db.FetchAllStudents();
             ItemSource = ToDataTable<Student>(results);
         }
+
+        public void navIntView()
+        {
+            _navState.CurrentViewModel = new InitialViewModel(_navState);
+        }
         public void navResultView()
         {
+            NavigationState state = new NavigationState();
+            state = _navState;
             switch (Option)
             {
+                
+                    
                 case "1":
-                    _navState.CurrentViewModel = new ResultClassViewModel(Int32.Parse(SearchValue));
+                    if (checkClassInput(SearchValue))
+                    {
+                        _navState.CurrentViewModel = new ResultClassViewModel(Int32.Parse(SearchValue), _navState, this.GetType().Name);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid Input (numbers only)");
+                    }
+                    
                     break;
+
+                case "2":
+                    {
+                        _navState.CurrentViewModel = new ResultMeetingViewModel(Int32.Parse(SearchValue), _navState, this.GetType().Name);
+                        break;
+                    }
+            }
+        }
+        private bool checkClassInput(string input)
+        {
+            //for class input
+            try 
+            { 
+
+                Int32.Parse(input);
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 

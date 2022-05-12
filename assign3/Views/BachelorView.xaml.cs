@@ -16,23 +16,20 @@ using System.Windows.Shapes;
 namespace assign3.Views
 {
     /// <summary>
-    /// Interaction logic for HomeView.xaml
+    /// Interaction logic for BachelorView.xaml
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class BachelorView : UserControl
     {
         private bool isSearchOptionClosed = true;
-        public HomeView()
+        public BachelorView()
         {
             InitializeComponent();
-           
         }
-
         private void ChangeTextBoxValue()
         {
-            if(searchOptions.SelectedItem != null)
+            if (searchOptions.SelectedItem != null)
             {
-                KeyValuePair<int, string> search = new KeyValuePair<int, string>();
-                search = (KeyValuePair<int, string>)searchOptions.SelectedItem;
+                KeyValuePair<int, string> search = (KeyValuePair<int, string>)searchOptions.SelectedItem;
                 if (search.Value != null)
                 {
 
@@ -54,7 +51,6 @@ namespace assign3.Views
                     }
                 }
             }
-            
         }
         private void SearchOptionsSelectChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -62,7 +58,6 @@ namespace assign3.Views
             isSearchOptionClosed = !search.IsDropDownOpen;
             ChangeTextBoxValue();
         }
-
         private void SearchOptionsDropDownClosed(object sender, EventArgs e)
         {
             if (isSearchOptionClosed)
@@ -72,29 +67,5 @@ namespace assign3.Views
             }
         }
 
-        private void GridResultUpdated(object sender, DataTransferEventArgs e)
-        {
-            DataGrid itemList = sender as DataGrid;
-            if (itemList.Columns.Count != 0)
-            {
-                if ((string)itemList.Columns[0].Header == "StudentId")
-                {
-                    itemList.Columns.RemoveAt(0);
-                }
-
-            }
-            
-                
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_1(object sender)
-        {
-
-        }
     }
 }
