@@ -11,7 +11,11 @@ namespace assign3.Models
         public int? GroupId { get; set; }
         public string GroupName { get; set; }
 
+        public List<Student> StudentList { get; set; }
 
+        public StudentGroup(){
+            StudentList = new List<Student>();
+        }
         public override string ToString()
         {
             return String.Format("{0} {1}", GroupId, GroupName);

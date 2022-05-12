@@ -167,8 +167,19 @@ namespace assign3.ViewModels
                     }
                     
                     break;
+                case "3":
+                    if (checkClassInput(SearchValue))
+                    {
+                        _navState.CurrentViewModel = new ResultGroupViewModel(Int32.Parse(SearchValue), _navState, this.GetType().Name);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid Input (numbers only)");
+                    }
 
-                
+                    break;
+
+
             }
         }
         private bool checkClassInput(string input)
