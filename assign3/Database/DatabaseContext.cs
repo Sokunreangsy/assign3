@@ -112,6 +112,53 @@ namespace assign3.Database
             }
             return studentGroups;
         }
+        public List<Class> FetchAllClasses()
+        {
+            List<Class> resultClass = new List<Class>();
+            MySqlDataReader rdr = null;
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("select * from class", conn);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    //Note that in your assignment you will need to inspect the *type* of the
+                    //employee/researcher before deciding which kind of concrete class to create.
+                    Class result = new Class
+                    {
+                        ClassId = rdr.GetInt32(0),
+                        GroupId = rdr.GetInt32(1),
+                        Day = ParseEnum<Days>(rdr.GetString(2)),
+                        Start = rdr.GetString(3),
+                        End = rdr.GetString(4),
+                        Room = rdr.GetString(5)
+                    };
+                    resultClass.Add(result);
+                }
+
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine("Error connecting to database: " + e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return resultClass;
+        }
         public List<Class> FetchClasses(int id)
         {
             List<Class> resultClass = new List<Class>();
@@ -183,18 +230,21 @@ namespace assign3.Database
 
                 while (rdr.Read())
                 {
-                    meetings.Add(new Meeting
+                    Meeting row = new Meeting();
+                    if (rdr.IsDBNull(1))
                     {
-                        MeetingID = rdr.GetInt32(0),
-                        GroupID = rdr.GetInt32(1),
-                        day = ParseEnum<MeetingDay>(rdr.GetString(2)),
-                        Start = rdr.GetString(3),
-                        End = rdr.GetString(4),
-                        Room = rdr.GetString(5)
-
-                        /// fetch only time
-                        ///https://www.tutorialsrack.com/articles/309/how-to-get-only-time-part-from-datetime-in-csharp
-                    });
+                        row.GroupID = null;
+                    }
+                    else
+                    {
+                        row.GroupID = rdr?.GetInt32(1);
+                    }
+                    row.MeetingID = rdr?.GetInt32(0);
+                    row.day = ParseEnum<MeetingDay>(rdr?.GetString(2));
+                    row.Start = rdr?.GetString(3);
+                    row.End = rdr?.GetString(4);
+                    row.Room = rdr?.GetString(5);
+                    meetings.Add(row);
 
                 } // end of while
             } //end of try
@@ -217,6 +267,10 @@ namespace assign3.Database
         }
         private static T ParseEnum<T>(string value)
         {
+            if (value =="")
+            {
+                return (T)Enum.Parse(typeof(T), "empty");
+            }
             return (T)Enum.Parse(typeof(T), value);
         }
     }

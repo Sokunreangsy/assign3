@@ -91,19 +91,11 @@
                 
                 Command="{Binding NavigateResultCommand}" Height="20" Width="39" RenderTransformOrigin="1.556,1.108"/>
 
-                HorizontalAlignment="Left" 
-                Margin="701,63,0,0" 
-                VerticalAlignment="Top" 
-                Width="45" 
-                Height="21"
-                Command="{Binding NavigateResultCommand}"/>
+
         <Button Content="Class" 
-                HorizontalAlignment="Left" 
-                Margin="141,63,0,0" 
-                VerticalAlignment="Top" 
-                Click="Button_Click" 
-                Width="40"
-                Command="{Binding SelectClassCommand}"/>
+                Margin="202,37,550,16" 
+                Grid.Column="0" Grid.Row="0"
+                Command="{Binding SelectClassCommand}" Width="48" Height="20"/>
 
 
 

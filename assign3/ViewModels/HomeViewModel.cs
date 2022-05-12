@@ -120,7 +120,7 @@ namespace assign3.ViewModels
 
             NavigateIntCommand = new RelayCommand(obj => { this.navIntView(); });
 
-            SelectClassCommand = new RelayCommand(obj => { this.FetchClass(); });
+            SelectClassCommand = new RelayCommand(obj => { this.FetchAllClass(); });
 
             _db = new DatabaseContext();
         }
@@ -178,7 +178,7 @@ namespace assign3.ViewModels
             }
         }
 
-        private void FetchClass()
+        private void FetchAllClass()
         {
             List<Class> results = new List<Class>();
             results = _db.FetchAllClasses();
