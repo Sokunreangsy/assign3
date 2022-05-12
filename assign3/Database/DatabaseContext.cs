@@ -128,16 +128,22 @@ namespace assign3.Database
                 {
                     //Note that in your assignment you will need to inspect the *type* of the
                     //employee/researcher before deciding which kind of concrete class to create.
-                    Class result = new Class
+                    Class row = new Class();
+                    if (rdr.IsDBNull(1))
                     {
-                        ClassId = rdr.GetInt32(0),
-                        GroupId = rdr.GetInt32(1),
-                        Day = ParseEnum<Days>(rdr.GetString(2)),
-                        Start = rdr.GetString(3),
-                        End = rdr.GetString(4),
-                        Room = rdr.GetString(5)
-                    };
-                    resultClass.Add(result);
+                        row.GroupId = null;
+                    }
+                    else
+                    {
+                        row.GroupId = rdr.GetInt32(1);
+                    }
+                    row.ClassId = rdr.GetInt32(0);
+                    row.Day = ParseEnum<Days>(rdr.GetString(2));
+                    row.Start = rdr.GetString(3);
+                    row.End = rdr.GetString(4);
+                    row.Room = rdr.GetString(5);
+                    
+                    resultClass.Add(row);
                 }
 
             }
@@ -177,21 +183,27 @@ namespace assign3.Database
 
                 while (rdr.Read())
                 {
+                    Class row = new Class();
+                    StudentGroup group = new StudentGroup();
+                    if (rdr.IsDBNull(1))
+                    {
+                        group.GroupId = null;
+                    }
+                    else
+                    {
+                        group.GroupId = rdr.GetInt32(5);
+                    }
+                    row.ClassId = rdr.GetInt32(0);
+                    row.Day = ParseEnum<Days>(rdr.GetString(1));
+                    row.Start = rdr.GetString(2);
+                    row.End = rdr.GetString(3);
+                    row.Room = rdr.GetString(4);
+                    group.GroupName = rdr.GetString(6);
                     //Note that in your assignment you will need to inspect the *type* of the
                     //employee/researcher before deciding which kind of concrete class to create.
-                     Class result = new Class { 
-                        ClassId=rdr.GetInt32(0),
-                        Day=ParseEnum<Days>(rdr.GetString(1)),
-                        Start=rdr.GetString(2),
-                        End=rdr.GetString(3),
-                        Room=rdr.GetString(4)
-                    };
-                    result.StudentGroups.Add(new StudentGroup
-                    {
-                        GroupId = rdr.GetInt32(5),
-                        GroupName = rdr.GetString(6)
-                    });
-                    resultClass.Add(result);
+
+                    row.StudentGroups.Add(group);
+                    resultClass.Add(row);
                 }
                 
             }

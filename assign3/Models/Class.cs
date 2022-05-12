@@ -10,17 +10,18 @@ namespace assign3.Models
     {
         Monday,
         Tuesday,
-        Wendesday,
+        Wednesday,
         Thursday,
         Friday,
         Saturday,
-        Sunday
+        Sunday,
+        empty
     }
     public class Class
     {
-        public int ClassId { get; set; }
-        public int GroupId { get; set; }
-        public Days Day { get; set; }
+        public int? ClassId { get; set; }
+        public int? GroupId { get; set; }
+        public Days? Day { get; set; }
         public string Start { get; set; }
         public string End { get; set; }
         public string Room { get; set; }
