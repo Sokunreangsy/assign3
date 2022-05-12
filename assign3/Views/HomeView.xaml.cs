@@ -38,15 +38,14 @@ namespace assign3.Views
 
                     switch (search.Value)
                     {
-                        case "Students":
-                            searchSuggest.Text = "Please enter students' name";
+                        case "Student Meetings":
+                            searchSuggest.Text = "Please enter students' id";
                             break;
-
+                        case "Student Classes":
+                            searchSuggest.Text = "Please enter students' id";
+                            break;
                         case "Classes":
                             searchSuggest.Text = "Please enter class id";
-                            break;
-                        case "Meetings":
-                            searchSuggest.Text = "Please enter meeting id";
                             break;
                         case "Groups":
                             searchSuggest.Text = "Please enter group id";
@@ -81,6 +80,19 @@ namespace assign3.Views
                 {
                     itemList.Columns.RemoveAt(0);
                 }
+                
+                if (itemList.Columns.Count == 4)
+                {
+                    if ((string)itemList.Columns[3].Header == "ClassesList")
+                    {
+                        itemList.Columns.RemoveAt(3);
+                    }
+                    if ((string)itemList.Columns[2].Header == "MeetingsList")
+                    {
+                        itemList.Columns.RemoveAt(2);
+                    }
+                }
+                    
                 if (itemList.Columns.Count == 7)
                 {
                     if ((string)itemList.Columns[6].Header == "StudentGroups")
@@ -88,7 +100,14 @@ namespace assign3.Views
                         itemList.Columns.RemoveAt(6);
                     }
                 }
-               
+                if (itemList.Columns.Count == 3)
+                {
+                    if ((string)itemList.Columns[2].Header == "StudentList")
+                    {
+                        itemList.Columns.RemoveAt(2);
+                    }
+                }
+                
 
             }
             

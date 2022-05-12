@@ -19,22 +19,23 @@
             <ColumnDefinition Width="21*" />
 
         </Grid.ColumnDefinitions>
-        <Button Content="Student" 
-
-                Margin="61,37,689,16" 
+        <Button Content="Students" 
+                FontSize="12" FontWeight="Bold"
+                Margin="122,37,617,12" 
                 Grid.Column="0" Grid.Row="0" 
-                Command="{Binding SelectStudentCommand}" Width="50" Height="20" RenderTransformOrigin="-0.409,0.803"
+                Command="{Binding SelectStudentCommand}" RenderTransformOrigin="-0.409,0.803" Width="60" Height="20"
                 />
         <Button Content="Back" 
-                Margin="61,12,0,41" 
+                Margin="57,10,0,43" 
                 HorizontalAlignment="Left"
-                Command="{Binding NavigateIntCommand}" Width="50" Height="20" RenderTransformOrigin="1.127,0.292"
+                Command="{Binding NavigateIntCommand}" Width="60" Height="25" RenderTransformOrigin="1.127,0.292"
                 />
 
         <Button Content="Meeting" 
-                Margin="132,37,620,16" 
+                Margin="188,37,553,12" 
                 Grid.Column="0" Grid.Row="0"
-                Command="{Binding SelectMeetingCommand}" Width="48" Height="20"/>
+                FontSize="12" FontWeight="Bold"
+                Command="{Binding SelectMeetingCommand}" Width="60" Height="20"/>
         <DataGrid Margin="61,41,54,46"
                   AutoGenerateColumns="True" 
                   GridLinesVisibility="All" 
@@ -46,18 +47,17 @@
         <TextBox  Width="242"  
                   
                   x:Name="Search" 
-                  Margin="465,37,93,16"
+                  Margin="465,37,93,15"
                   Grid.Column="0" Grid.Row="0"
                   Text="{Binding Path=SearchValue, 
-                    UpdateSourceTrigger=PropertyChanged}" Height="20">
-
-        </TextBox>
+                    UpdateSourceTrigger=PropertyChanged}" Height="20"/>
         <TextBlock IsHitTestVisible="False" 
-                   Text="Please enter students' name" 
+                   Text="Please enter students' id"
+                   FontSize="12" FontWeight="Bold"
                    Grid.Column="0" Grid.Row="0"
-                   Margin="470,39,182,18" 
+                   Margin="470,40,182,15" 
                    Foreground="DarkGray"
-                   Name="searchSuggest" Height="16" Width="148">
+                   Name="searchSuggest" Width="148" Height="18">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -70,7 +70,7 @@
             </TextBlock.Style>
         </TextBlock>
         <ComboBox 
-                  Margin="388,37,335,16" 
+                  Margin="343,37,335,15" 
                   
                   Grid.Column="0" Grid.Row="0"
                   SelectionChanged="SearchOptionsSelectChanged"
@@ -82,20 +82,26 @@
                   DisplayMemberPath="Value"
                   SelectedValuePath="Key"
                   
-                  SelectedValue="{Binding Option, Mode=TwoWay}" Height="20" Width="77"  />
+                  SelectedValue="{Binding Option, Mode=TwoWay}" Width="122" Height="20"  />
         <Button Content="Search" 
 
                 
-                Margin="707,37,54,16" 
+                Margin="707,37,33,15" 
                 Grid.Column="0" Grid.Row="0"
                 
-                Command="{Binding NavigateResultCommand}" Height="20" Width="39" RenderTransformOrigin="1.556,1.108"/>
+                Command="{Binding NavigateResultCommand}" RenderTransformOrigin="1.556,1.108" Width="60" Height="20"/>
 
 
-        <Button Content="Class" 
-                Margin="202,37,550,16" 
+        <Button Content="Classes" 
+                Margin="252,37,489,12" 
+                FontSize="12" FontWeight="Bold"
                 Grid.Column="0" Grid.Row="0"
-                Command="{Binding SelectClassCommand}" Width="48" Height="20"/>
+                Command="{Binding SelectClassCommand}" Width="60" Height="20"/>
+        <Button Content="Groups" 
+                Margin="57,36,683,12" 
+                Grid.Column="0" Grid.Row="0"
+                FontSize="12" FontWeight="Bold"
+                Command="{Binding SelectGroupCommand}" RenderTransformOrigin="0.764,0.116" Width="60" Height="20"/>
 
 
 

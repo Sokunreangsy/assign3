@@ -30,10 +30,12 @@ namespace assign3.ViewModels
         public ICommand SelectStudentCommand { get; set; }
         public ICommand SearchClassCommand { get; set; }
         public ICommand SelectClassCommand { get; set; }
+        public ICommand SelectGroupCommand { get; set; }
         public ICommand NavigateResultCommand { get; set; }
         
         public ICommand SelectMeetingCommand { get; set; }
         public ICommand NavigateIntCommand { get; set; }
+
         private DataTable _itemSource;
         private ObservableCollection<Student> _students;
 
@@ -77,13 +79,13 @@ namespace assign3.ViewModels
             }
         }
         private ObservableCollection<KeyValuePair<int,string>> _dropDownOptions = new ObservableCollection<KeyValuePair<int, string>> {
-            new KeyValuePair<int, string>(0,"Students"),
-            new KeyValuePair<int, string>(1, "Classes"),
-            new KeyValuePair<int, string>(2, "Meetings"),
-            new KeyValuePair<int, string>(3, "Groups"),
+            new KeyValuePair<int, string>(0,"Groups"),
+            new KeyValuePair<int, string>(1, "Student Meetings"),
+            new KeyValuePair<int, string>(2, "Classes"),
+            new KeyValuePair<int, string>(3, "Student Classes"),
             
 
-        };
+        }; 
         public ObservableCollection<KeyValuePair<int, string>> DropDownOptions
         {
             get
@@ -118,9 +120,9 @@ namespace assign3.ViewModels
             NavigateResultCommand = new RelayCommand(obj => { this.navResultView(); });
             SelectMeetingCommand = new RelayCommand(obj => { this.FetchMeeting(); });
 
-            NavigateIntCommand = new RelayCommand(obj => { this.navIntView(); });
-
             SelectClassCommand = new RelayCommand(obj => { this.FetchAllClass(); });
+            SelectGroupCommand = new RelayCommand(obj => { this.FetchGroup(); });
+            NavigateIntCommand = new RelayCommand(obj => { this.navIntView(); });
 
             _db = new DatabaseContext();
         }
@@ -142,8 +144,18 @@ namespace assign3.ViewModels
             state = _navState;
             switch (Option)
             {
-
                 case "0":
+                    if (checkClassInput(SearchValue))
+                    {
+                        _navState.CurrentViewModel = new ResultGroupViewModel(Int32.Parse(SearchValue), _navState, this.GetType().Name);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid Input (numbers only)");
+                    }
+
+                    break;
+                case "1":
                     {
                         if (checkClassInput(SearchValue))
                         {
@@ -156,7 +168,7 @@ namespace assign3.ViewModels
 
                         break;
                     }
-                case "1":
+                case "2":
                     if (checkClassInput(SearchValue))
                     {
                         _navState.CurrentViewModel = new ResultClassViewModel(Int32.Parse(SearchValue), _navState, this.GetType().Name);
@@ -170,7 +182,7 @@ namespace assign3.ViewModels
                 case "3":
                     if (checkClassInput(SearchValue))
                     {
-                        _navState.CurrentViewModel = new ResultGroupViewModel(Int32.Parse(SearchValue), _navState, this.GetType().Name);
+                        _navState.CurrentViewModel = new ResultStudentClassViewModel(Int32.Parse(SearchValue), _navState, this.GetType().Name);
                     }
                     else
                     {
@@ -208,6 +220,12 @@ namespace assign3.ViewModels
             List<Meeting> results = new List<Meeting>();
             results = _db.FetchAllMeetings();
             ItemSource = ToDataTable<Meeting>(results);
+        }
+        private void FetchGroup()
+        {
+            List<StudentGroup> results = new List<StudentGroup>();
+            results = _db.FetchGroups();
+            ItemSource = ToDataTable<StudentGroup>(results);
         }
         private DataTable ToDataTable<T>(List<T> items)
         {

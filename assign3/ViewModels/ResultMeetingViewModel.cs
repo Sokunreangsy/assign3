@@ -121,10 +121,6 @@ namespace assign3.ViewModels
             StudentId = AStudent.StudentId;
             GivenName = AStudent.GivenName;
             FamilyName = AStudent.FamilyName;
-            if (! AStudent.StudentId.HasValue)
-            {
-                MessageBox.Show("No result found");
-            }
         }
 
 

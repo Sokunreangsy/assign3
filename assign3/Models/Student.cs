@@ -29,10 +29,11 @@ namespace assign3.Models
         public string Photo { get; set; }
         public Category Category { get; set; }*/
         public List<Meeting> MeetingsList { get; set; }
-        
+        public List<Class> ClassesList { get; set; }
         public Student()
         {
             MeetingsList = new List<Meeting>();
+            ClassesList = new List<Class>();
         }
         public override string ToString()
         {

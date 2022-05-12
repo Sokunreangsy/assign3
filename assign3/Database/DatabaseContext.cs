@@ -70,7 +70,7 @@ namespace assign3.Database
             return students;
         }
 
-        private List<StudentGroup> FetchGroups(int id)
+        public List<StudentGroup> FetchGroups()
         {
             List<StudentGroup> studentGroups = new List<StudentGroup>();
             MySqlDataReader rdr = null;
@@ -79,20 +79,22 @@ namespace assign3.Database
 
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("select * from studentGroup where group_id=?id", conn);
-                cmd.Parameters.AddWithValue("id", id);
+                MySqlCommand cmd = new MySqlCommand("Select * from studentGroup", conn);
                 rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
                 {
-                    //Note that in your assignment you will need to inspect the *type* of the
-                    //employee/researcher before deciding which kind of concrete class to create.
-                    studentGroups.Add(new StudentGroup
+                    StudentGroup group = new StudentGroup();
+                    if (rdr.IsDBNull(1))
                     {
-                        
-                        GroupId = rdr.GetInt32(0),
-                        GroupName = rdr.GetString(1)
-                    });
+                        group.GroupId = null;
+                    }
+                    else
+                    {
+                        group.GroupId = rdr.GetInt32(0);
+                    }
+                    group.GroupName = rdr.GetString(1);
+                    studentGroups.Add(group);
                 }
             }
             catch (MySqlException e)
@@ -297,7 +299,7 @@ namespace assign3.Database
                 {
                     Meeting meeting = new Meeting();
                     
-                    if (rdr.IsDBNull(1))
+                    if (rdr.IsDBNull(4))
                     {
                         meeting.GroupID = null;
                     }
@@ -382,6 +384,62 @@ namespace assign3.Database
             } // end of finally
 
             return group;
+        }
+        public Student FetchClassStudents(int id)          //change to load all 
+        {
+            Student student = new Student();
+            MySqlDataReader rdr = null;
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT student.student_id," +
+                    "class.class_id,class.group_id,class.day,class.start,class.end,class.room " +
+                    "FROM student INNER JOIN class ON student.group_id=class.group_id " +
+                    "WHERE student.student_id=?id", conn);
+                cmd.Parameters.AddWithValue("id", id);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Class aClass = new Class();
+
+                    if (rdr.IsDBNull(2))
+                    {
+                        aClass.GroupId = null;
+                    }
+                    else
+                    {
+                        aClass.GroupId = rdr?.GetInt32(2);
+                    }
+
+                    student.StudentId = rdr?.GetInt32(0);
+                    aClass.ClassId = rdr?.GetInt32(1);
+                    aClass.Day = ParseEnum<Days>(rdr?.GetString(3));
+                    aClass.Start = rdr?.GetString(4);
+                    aClass.End = rdr?.GetString(5);
+                    aClass.Room = rdr?.GetString(6);
+
+                    student.ClassesList.Add(aClass);
+                } // end of while
+            } //end of try
+            catch (MySqlException error)
+            {
+                Console.WriteLine("Error connecting to database: " + error);
+            } // end of catch
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            } // end of finally
+
+            return student;
         }
         private static T ParseEnum<T>(string value)
         {

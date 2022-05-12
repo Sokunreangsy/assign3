@@ -54,10 +54,11 @@ namespace assign3.ViewModels
             NavigateResultCommand = new RelayCommand(obj => { this.navResultView(); });
         }
         private ObservableCollection<KeyValuePair<int, string>> _dropDownOptions = new ObservableCollection<KeyValuePair<int, string>> {
-            new KeyValuePair<int, string>(0,"Students"),
-            new KeyValuePair<int, string>(1, "Classes"),
-            new KeyValuePair<int, string>(2, "Meetings"),
-            new KeyValuePair<int, string>(3, "Groups"),
+            new KeyValuePair<int, string>(0,"Groups"),
+            new KeyValuePair<int, string>(1, "Student Meetings"),
+            new KeyValuePair<int, string>(2, "Classes"),
+            new KeyValuePair<int, string>(3, "Student Classes"),
+
 
         };
         public ObservableCollection<KeyValuePair<int, string>> DropDownOptions
@@ -83,6 +84,17 @@ namespace assign3.ViewModels
             {
 
                 case "0":
+                    if (checkClassInput(SearchValue))
+                    {
+                        _navState.CurrentViewModel = new ResultGroupViewModel(Int32.Parse(SearchValue), _navState, this.GetType().Name);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid Input (numbers only)");
+                    }
+
+                    break;
+                case "1":
                     {
                         if (checkClassInput(SearchValue))
                         {
@@ -95,7 +107,7 @@ namespace assign3.ViewModels
 
                         break;
                     }
-                case "1":
+                case "2":
                     if (checkClassInput(SearchValue))
                     {
                         _navState.CurrentViewModel = new ResultClassViewModel(Int32.Parse(SearchValue), _navState, this.GetType().Name);
@@ -106,7 +118,19 @@ namespace assign3.ViewModels
                     }
 
                     break;
-                
+
+                case "3":
+                    if (checkClassInput(SearchValue))
+                    {
+                        _navState.CurrentViewModel = new ResultStudentClassViewModel(Int32.Parse(SearchValue), _navState, this.GetType().Name);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid Input (numbers only)");
+                    }
+
+                    break;
+
             }
         }
         private bool checkClassInput(string input)
