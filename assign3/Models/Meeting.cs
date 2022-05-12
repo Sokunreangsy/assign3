@@ -24,7 +24,7 @@ namespace assign3.Models
         public MeetingDay? day { get; set; }
 		public string Start { get; set; }
 		public string End { get; set; } 
-		public string Room { get; set; } 
+		public string Room { get; set; }
 		public override string ToString()
 		{
 			

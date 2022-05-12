@@ -18,7 +18,7 @@ namespace assign3.Models
     }
     public class Student
     {
-        public string StudentId { get; set; }
+        public int? StudentId { get; set; }
         public string GivenName { get; set; }
         public string FamilyName { get; set; }
         /*        public int GroupId { get; set; }
@@ -28,8 +28,12 @@ namespace assign3.Models
         public string Email { get; set; }
         public string Photo { get; set; }
         public Category Category { get; set; }*/
-
+        public List<Meeting> MeetingsList { get; set; }
         
+        public Student()
+        {
+            MeetingsList = new List<Meeting>();
+        }
         public override string ToString()
         {
             return String.Format("{0} {1}",GivenName,FamilyName);

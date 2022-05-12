@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace assign3.ViewModels
@@ -15,12 +16,65 @@ namespace assign3.ViewModels
     class ResultMeetingViewModel: ViewModelBase
     {
         private NavigationState _navState;
+        private string _preNavState;
+        private Student _aStudent;
         private ObservableCollection<Meeting> _meetings;
         private DatabaseContext _db;
-        public ICommand OnMeetingClickCommand { get; set; }
+        public ICommand OnBackCommand { get; set; }
         private Meeting _selectedMeeting;
-        private int _meetingId;
 
+        private int? _studentId;
+        private string _givenName;
+        private string _familyName;
+
+        public int? StudentId
+        {
+            get
+            {
+                return _studentId;
+            }
+            set
+            {
+                _studentId = value;
+                OnPropertyChanged(nameof(StudentId));
+            }
+        }
+        public string GivenName
+        {
+            get
+            {
+                return _givenName;
+            }
+            set
+            {
+                _givenName = value;
+                OnPropertyChanged(nameof(GivenName));
+            }
+        }
+        public string FamilyName
+        {
+            get
+            {
+                return _familyName;
+            }
+            set
+            {
+                _familyName = value;
+                OnPropertyChanged(nameof(FamilyName));
+            }
+        }
+        public Student AStudent
+        {
+            get
+            {
+                return _aStudent;
+            }
+            set
+            {
+                _aStudent = value;
+                OnPropertyChanged(nameof(AStudent));
+            }
+        }
         public Meeting SelectedMeeting
         {
             get { return _selectedMeeting; }
@@ -40,17 +94,37 @@ namespace assign3.ViewModels
 
         }
 
-        public ResultMeetingViewModel(int meetingId, NavigationState navState, String preNavState)
+        public ResultMeetingViewModel(int studentid, NavigationState navState, string preNavState)
         {
             _navState = navState;
+            _preNavState = preNavState;
             _db = new DatabaseContext();
-            _meetingId = meetingId;
-            FetchAllMeetings();
+            FetchAStudent(studentid);
+            OnBackCommand = new RelayCommand(obj => { this.navHomeView(); });
         }
-
-        private void FetchAllMeetings()
+        public void navHomeView()
         {
-            Meetings = new ObservableCollection<Meeting>(_db.FetchAllMeetings());
+            if (_preNavState == "BachelorViewModel")
+            {
+                _navState.CurrentViewModel = new BachelorViewModel(_navState);
+            }
+            else
+            {
+                _navState.CurrentViewModel = new HomeViewModel(_navState);
+            }
+
+        }
+        private void FetchAStudent(int id)
+        {
+            AStudent = _db.FetchStudentMeeting(id);
+            Meetings = new ObservableCollection<Meeting>(AStudent.MeetingsList);
+            StudentId = AStudent.StudentId;
+            GivenName = AStudent.GivenName;
+            FamilyName = AStudent.FamilyName;
+            if (! AStudent.StudentId.HasValue)
+            {
+                MessageBox.Show("No result found");
+            }
         }
 
 
