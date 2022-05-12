@@ -12,7 +12,7 @@
                 HorizontalAlignment="Left" 
                 Margin="38,63,0,0" 
                 VerticalAlignment="Top" 
-                Command="{Binding SelectStudentCommand}"/>
+                Command="{Binding SelectStudentCommand}" Click="Button_Click_1"/>
         <Button Content="Meeting" 
                 HorizontalAlignment="Left" 
                 Margin="88,63,0,0" 
@@ -80,6 +80,13 @@
                 Width="45" 
                 Height="21"
                 Command="{Binding NavigateResultCommand}"/>
+        <Button Content="Class" 
+                HorizontalAlignment="Left" 
+                Margin="141,63,0,0" 
+                VerticalAlignment="Top" 
+                Click="Button_Click" 
+                Width="40"
+                Command="{Binding SelectClassCommand}"/>
 
 
 
