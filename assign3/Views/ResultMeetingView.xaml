@@ -19,12 +19,6 @@
         <TextBlock HorizontalAlignment="Left" Margin="32,81,0,0" Text="Student ID" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Height="17"/>
         <TextBlock HorizontalAlignment="Left" Margin="32,116,0,0" Text="Given Name" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Height="17"/>
         <TextBlock HorizontalAlignment="Left" Margin="32,147,0,0" Text="Family Name" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Height="17"/>
-        <TextBlock 
-            HorizontalAlignment="Left" 
-            Margin="123,32,0,0" 
-            Text="{Binding MeetingID}" 
-            TextWrapping="Wrap" 
-            VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="369,19,0,0" Text="List of all meeting" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="128"/>
         <ListView x:Name="classItems" 
                   Margin="369,44,58,228"
@@ -96,7 +90,22 @@
                 HorizontalAlignment="Left" 
                 Margin="32,34,0,0" 
                 VerticalAlignment="Top"
-                Command="{Binding OnBackCommand}"/>
+                Command="{Binding OnBackCommand}"/> 
+        <TextBlock HorizontalAlignment="Left" 
+                   Margin="136,82,0,0" 
+                   Text="{Binding StudentId}" 
+                   TextWrapping="Wrap" 
+                   VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" 
+                   Margin="136,116,0,0" 
+                   Text="{Binding GivenName}" 
+                   TextWrapping="Wrap" 
+                   VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" 
+                   Margin="136,147,0,0" 
+                   Text="{Binding FamilyName}" 
+                   TextWrapping="Wrap" 
+                   VerticalAlignment="Top"/>
 
     </Grid>
 </UserControl>

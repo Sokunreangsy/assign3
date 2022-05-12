@@ -81,8 +81,20 @@ namespace assign3.ViewModels
 
             switch (Option)
             {
-                
 
+                case "0":
+                    {
+                        if (checkClassInput(SearchValue))
+                        {
+                            _navState.CurrentViewModel = new ResultMeetingViewModel(Int32.Parse(SearchValue), _navState, this.GetType().Name);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid Input (numbers only)");
+                        }
+
+                        break;
+                    }
                 case "1":
                     if (checkClassInput(SearchValue))
                     {
@@ -94,19 +106,7 @@ namespace assign3.ViewModels
                     }
 
                     break;
-                case "2":
-                    {
-                        if (checkClassInput(SearchValue))
-                        {
-                            _navState.CurrentViewModel = new ResultMeetingViewModel(Int32.Parse(SearchValue), _navState, this.GetType().Name);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Invalid Input (numbers only)"); 
-                        }
-                        
-                        break;
-                    }
+                
             }
         }
         private bool checkClassInput(string input)

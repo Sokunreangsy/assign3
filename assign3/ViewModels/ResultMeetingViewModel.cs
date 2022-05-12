@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace assign3.ViewModels
@@ -21,8 +22,47 @@ namespace assign3.ViewModels
         private DatabaseContext _db;
         public ICommand OnBackCommand { get; set; }
         private Meeting _selectedMeeting;
-        
 
+        private int? _studentId;
+        private string _givenName;
+        private string _familyName;
+
+        public int? StudentId
+        {
+            get
+            {
+                return _studentId;
+            }
+            set
+            {
+                _studentId = value;
+                OnPropertyChanged(nameof(StudentId));
+            }
+        }
+        public string GivenName
+        {
+            get
+            {
+                return _givenName;
+            }
+            set
+            {
+                _givenName = value;
+                OnPropertyChanged(nameof(GivenName));
+            }
+        }
+        public string FamilyName
+        {
+            get
+            {
+                return _familyName;
+            }
+            set
+            {
+                _familyName = value;
+                OnPropertyChanged(nameof(FamilyName));
+            }
+        }
         public Student AStudent
         {
             get
@@ -78,6 +118,13 @@ namespace assign3.ViewModels
         {
             AStudent = _db.FetchStudentMeeting(id);
             Meetings = new ObservableCollection<Meeting>(AStudent.MeetingsList);
+            StudentId = AStudent.StudentId;
+            GivenName = AStudent.GivenName;
+            FamilyName = AStudent.FamilyName;
+            if (! AStudent.StudentId.HasValue)
+            {
+                MessageBox.Show("No result found");
+            }
         }
 
 
