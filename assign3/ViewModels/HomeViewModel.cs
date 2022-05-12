@@ -208,25 +208,29 @@ namespace assign3.ViewModels
                 return false;
             }
         }
-
+        //fetch all class
         private void FetchAllClass()
         {
             List<Class> results = new List<Class>();
             results = _db.FetchAllClasses();
             ItemSource = ToDataTable<Class>(results);
         }
+        //fetch all meeting
         private void FetchMeeting()
         {
             List<Meeting> results = new List<Meeting>();
             results = _db.FetchAllMeetings();
             ItemSource = ToDataTable<Meeting>(results);
         }
+        //fetch all groups
         private void FetchGroup()
         {
             List<StudentGroup> results = new List<StudentGroup>();
             results = _db.FetchGroups();
             ItemSource = ToDataTable<StudentGroup>(results);
         }
+        //convert a list type to Datatable 
+        //this allows for dynamic behavior when the datatable is updated
         private DataTable ToDataTable<T>(List<T> items)
         {
             DataTable dataTable = new DataTable(typeof(T).Name);

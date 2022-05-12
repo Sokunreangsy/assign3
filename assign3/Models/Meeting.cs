@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace assign3.Models
 {
+	//model for meeting table
 	public enum MeetingDay
 	{
 		Monday,

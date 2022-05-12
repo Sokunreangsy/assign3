@@ -11,6 +11,9 @@ using System.Windows.Input;
 
 namespace assign3.ViewModels
 {
+    /// <summary>
+    /// view model for bachelorView
+    /// </summary>
     class BachelorViewModel:ViewModelBase
     {
         public ICommand NavigateIntCommand { get; set; }
@@ -53,6 +56,7 @@ namespace assign3.ViewModels
             NavigateIntCommand = new RelayCommand(obj => { this.navIntView(); });
             NavigateResultCommand = new RelayCommand(obj => { this.navResultView(); });
         }
+        //drop down menu values
         private ObservableCollection<KeyValuePair<int, string>> _dropDownOptions = new ObservableCollection<KeyValuePair<int, string>> {
             new KeyValuePair<int, string>(0,"Groups"),
             new KeyValuePair<int, string>(1, "Student Meetings"),
@@ -73,10 +77,12 @@ namespace assign3.ViewModels
                 OnPropertyChanged(nameof(DropDownOptions));
             }
         }
+        //navigation logic
         private void navIntView()
         {
             _navState.CurrentViewModel = new InitialViewModel(_navState);
         }
+        //navigation logic
         public void navResultView()
         {
 
@@ -133,6 +139,7 @@ namespace assign3.ViewModels
 
             }
         }
+        //checking input
         private bool checkClassInput(string input)
         {
             //for class input
